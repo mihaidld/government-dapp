@@ -1,0 +1,13 @@
+#root {
+  height: 100vh;
+  font-size: 100%;
+  background-image: url("./pics/pexels-bruno-thethe-1910231.jpg");
+}
+
+html {
+  background-color: black;
+}
+
+* {
+  color: white;
+}
