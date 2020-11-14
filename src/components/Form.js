@@ -1,34 +1,20 @@
-import React, { useContext, useState, useEffect } from "react";
-import { ethers } from "ethers";
+import React, { useContext, useState } from "react";
 import { Web3Context } from "../hooks/useWeb3";
-import { Government_address, Government_abi } from "../contracts/Government";
-import { Text, Button } from "@chakra-ui/core";
-
+import { Government_address } from "../contracts/Government";
 import "../form.css";
 
 function Form() {
-  const [web3State, login] = useContext(Web3Context);
-  const [government, setGovernment] = useState(null);
+  const { web3State, government, token } = useContext(Web3Context);
   const [inputAge, setInputAge] = useState(0);
   const [checkedWorking, setCheckedWorking] = useState(false);
   const [checkedSick, setCheckedSick] = useState(false);
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
+    await token.approve(Government_address, token.cap());
     await government.becomeCitizen(inputAge, checkedWorking, checkedSick);
+    e.target.reset();
   };
-
-  useEffect(() => {
-    if (web3State.signer !== null) {
-      setGovernment(
-        new ethers.Contract(
-          Government_address,
-          Government_abi,
-          web3State.signer
-        )
-      );
-    }
-  }, [web3State.signer]);
 
   // web3State.is_web3 ??
   // web3State.is_logged ??
@@ -37,17 +23,6 @@ function Form() {
 
   return (
     <>
-      <Text>Web3: {web3State.is_web3 ? "injected" : "no-injected"}</Text>
-      <Text>Network id: {web3State.chain_id}</Text>
-      <Text>Network name: {web3State.network_name}</Text>
-      <Text>MetaMask installed: {web3State.is_metamask ? "yes" : "no"}</Text>
-      <Text>logged: {web3State.is_logged ? "yes" : "no"}</Text>
-      <Text>{web3State.account}</Text>
-      {!web3State.is_logged && (
-        <>
-          <Button onClick={login}>login</Button>
-        </>
-      )}
       {government !== null && web3State.chain_id === 4 && (
         <section>
           <h2 className="h2">Become a Citizen</h2>

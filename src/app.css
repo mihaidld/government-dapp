@@ -1,7 +1,10 @@
 #root {
-  height: 100vh;
+  min-height: 100vh;
   font-size: 100%;
   background-image: url("./pics/pexels-bruno-thethe-1910231.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: repeat-y;
 }
 
 html {

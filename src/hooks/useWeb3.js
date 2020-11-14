@@ -1,6 +1,6 @@
 // export Web3 provider
 // export useWeb3()
-import React, { useCallback, useEffect, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { ethers } from "ethers";
 import {
   isWeb3,
@@ -9,6 +9,11 @@ import {
   loginToMetaMask,
   chainIdtoName,
 } from "./web3-utils";
+import { Government_address, Government_abi } from "../contracts/Government";
+import {
+  CitizenERC20_address,
+  CitizenERC20_abi,
+} from "../contracts/CitizenERC20";
 
 // web3 reducer
 const web3Reducer = (state, action) => {
@@ -47,9 +52,11 @@ const web3InitialState = {
   provider: null,
 };
 
-// web3 hook
-export const useWeb3 = (endpoint) => {
+// web3 and contracts hook
+const useWeb3 = () => {
   const [web3State, web3Dispatch] = useReducer(web3Reducer, web3InitialState);
+  const [government, setGovernment] = useState(null);
+  const [token, setToken] = useState(null);
 
   // login in to MetaMask manually.
   // TODO: Check for login on other wallet
@@ -167,9 +174,28 @@ export const useWeb3 = (endpoint) => {
     })();
   }, [web3State.provider]);
 
-  return [web3State, login];
-};
+  // GET contracts CitizenERC20 and Government
+  useEffect(() => {
+    if (web3State.signer !== null) {
+      setGovernment(
+        new ethers.Contract(
+          Government_address,
+          Government_abi,
+          web3State.signer
+        )
+      );
+      setToken(
+        new ethers.Contract(
+          CitizenERC20_address,
+          CitizenERC20_abi,
+          web3State.signer
+        )
+      );
+    }
+  }, [web3State.signer]);
 
+  return { web3State, login, government, token };
+};
 // Web3 context
 export const Web3Context = React.createContext(null);
 
