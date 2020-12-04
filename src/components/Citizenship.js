@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Web3Context } from "../hooks/useWeb3";
+import { ContractsContext } from "../context/ContractsContext";
 import { ethers } from "ethers";
 
+/* TODO: consider using useReducer and context for contracts */
+
 function Citizenship() {
-  const { government, token } = useContext(Web3Context);
+  const { government, token } = useContext(ContractsContext);
   const [inputAddress, setInputAddress] = useState("");
   const [balance, setBalance] = useState(0);
   const [citizen, setCitizen] = useState({
@@ -25,7 +27,7 @@ function Citizenship() {
     setBalance(ethers.utils.formatEther(res));
   };
   const handleOnClickCitizen = async (address) => {
-    const res = await government.citizen(address);
+    const res = await government.getCitizen(address);
     setCitizen({
       isAlive: res.isAlive ? "alive" : "not alive",
       employer:
@@ -34,16 +36,7 @@ function Citizenship() {
           : "no employer registered",
       isWorking: res.isWorking ? "is working" : "unemployed",
       isSick: res.isSick ? "is sick" : "healthy",
-      nbVotes: res.nbVotes.toString(),
-      termAdmin:
-        res.termAdmin > 0
-          ? new Date(res.termAdmin * 1000).toUTCString()
-          : "not an admin",
       retirementDate: new Date(res.retirementDate * 1000).toUTCString(),
-      termBanned:
-        res.termBanned > 0
-          ? new Date(res.termBanned * 1000).toUTCString()
-          : "not banned",
       nbOfCurrentAccountTokens: ethers.utils.formatEther(
         res.nbOfCurrentAccountTokens
       ),
@@ -59,7 +52,7 @@ function Citizenship() {
 
   return (
     <>
-      <div class="input-group mb-3">
+      <div className="input-group mb-3">
         <input
           id="address"
           name="address"
@@ -71,14 +64,14 @@ function Citizenship() {
         />
         <button
           type="submit"
-          className="btn btn-outline-light"
+          className="btn btn-outline-dark"
           onClick={() => handleOnClickBalanceOf(inputAddress)}
         >
           balance of
         </button>
         <button
           type="submit"
-          className="btn btn-outline-light"
+          className="btn btn-outline-dark"
           onClick={() => handleOnClickCitizen(inputAddress)}
         >
           citizen details
@@ -100,14 +93,8 @@ function Citizenship() {
           <dd className="col-sm-9">{citizen.isWorking}</dd>
           <dt className="col-sm-3">Health Status : </dt>
           <dd className="col-sm-9">{citizen.isSick}</dd>
-          <dt className="col-sm-3">Nb of votes received : </dt>
-          <dd className="col-sm-9">{citizen.nbVotes}</dd>
-          <dt className="col-sm-3">Term of administration role (if any) : </dt>
-          <dd className="col-sm-9">{citizen.termAdmin}</dd>
           <dt className="col-sm-3">Date of retirement : </dt>
           <dd className="col-sm-9">{citizen.retirementDate}</dd>
-          <dt className="col-sm-3">Term of banishment (if any) : </dt>
-          <dd className="col-sm-9">{citizen.termBanned}</dd>
           <dt className="col-sm-3">Nb tokens in current account : </dt>
           <dd className="col-sm-9">{citizen.nbOfCurrentAccountTokens}</dd>
           <dt className="col-sm-3">Health Insurance Tokens : </dt>

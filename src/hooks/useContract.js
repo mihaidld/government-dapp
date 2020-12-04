@@ -1,49 +1,16 @@
-/*
-import { ethers } from 'ethers'
-import React, { useEffect } from 'react'
+import { ethers } from "ethers";
+import { useState, useEffect, useContext } from "react";
+import { Web3Context } from "../context/Web3Context";
 
-const ethersCallReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_contract':
-      return { ...state, contract: action.contract }
-    case 'success':
-      return {
-        ...state,
-        success: true,
-        loading: false,
-        error: false,
-        response: action.response,
-      }
-    case 'loading':
-      state = { ...initialState }
-      return { ...state, success: false, loading: true, error: false }
-    case 'error':
-      return {
-        ...state,
-        success: false,
-        loading: false,
-        error: true,
-        message: action.message,
-      }
-    default:
-      throw new Error(`${action.type} not handled in contractReducer`)
-  }
-}
-
-const callState = {
-  read_contract: null,
-  write_contract: null,
-  success: false,
-  loading: false,
-  error: false,
-  response: null,
-}
-
-const useContract = (address, abi, provider) => {
+export const useContract = (address, abi) => {
+  const { web3State } = useContext(Web3Context);
+  const [contract, setContract] = useState(null);
   useEffect(() => {
-    const read_contract = new ethers.contract(address, abi, provider)
-    const signer = provider.getSigner()
-    const write_contract = new ethers.contract(address, abi, signer)
-  }, [])
-}
-*/
+    if (web3State.signer) {
+      setContract(new ethers.Contract(address, abi, web3State.signer));
+    } else {
+      setContract(null);
+    }
+  }, [web3State.signer, address, abi]);
+  return contract;
+};

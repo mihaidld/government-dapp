@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider, theme } from "@chakra-ui/core";
 import "focus-visible/dist/focus-visible";
-import { Web3Provider } from "./hooks/useWeb3";
+import { Web3Provider } from "./context/Web3Context";
+import { ContractsProvider } from "./context/ContractsContext";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -11,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme} resetCSS={true}>
       <Web3Provider>
-        <App />
+        <ContractsProvider>
+          <App />
+        </ContractsProvider>
       </Web3Provider>
     </ChakraProvider>
   </React.StrictMode>,

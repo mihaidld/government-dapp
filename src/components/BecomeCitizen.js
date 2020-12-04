@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
-import { Web3Context } from "../hooks/useWeb3";
-import { Government_address } from "../contracts/Government";
+import { Web3Context } from "../context/Web3Context";
+import { ContractsContext } from "../context/ContractsContext";
 import "../form.css";
 
-function Form() {
-  const { web3State, government, token } = useContext(Web3Context);
+// TODO : add toast when state changes inside callback listener triggered by event emitted
+
+function BecomeCitizen() {
+  const { web3State } = useContext(Web3Context);
+  const { government } = useContext(ContractsContext);
   const [inputAge, setInputAge] = useState(0);
-  const [checkedWorking, setCheckedWorking] = useState(false);
-  const [checkedSick, setCheckedSick] = useState(false);
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    await token.approve(Government_address, token.cap());
-    await government.becomeCitizen(inputAge, checkedWorking, checkedSick);
+    await government.becomeCitizen(inputAge);
     e.target.reset();
   };
 
@@ -43,7 +43,7 @@ function Form() {
                 }}
               />
             </div>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <label htmlFor="working" className="form-check-label  mr-3">
                 Check if employed
               </label>
@@ -70,8 +70,8 @@ function Form() {
                   setCheckedSick(event.target.checked);
                 }}
               />
-            </div>
-            <button type="submit" className="btn btn-outline-light mt-3">
+            </div> */}
+            <button type="submit" className="btn btn-outline-dark mt-3">
               Submit
             </button>
           </form>
@@ -81,4 +81,4 @@ function Form() {
   );
 }
 
-export default Form;
+export default BecomeCitizen;

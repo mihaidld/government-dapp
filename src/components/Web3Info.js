@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { Web3Context } from "../hooks/useWeb3";
+import { Web3Context } from "../context/Web3Context";
 
-function Connection() {
-  const { web3State, login } = useContext(Web3Context);
+function Web3Info() {
+  const { web3State } = useContext(Web3Context);
+
   return (
     <>
       <dl className="row">
@@ -20,20 +21,11 @@ function Connection() {
         <dd className="col-sm-9">{web3State.is_logged ? "yes" : "no"}</dd>
         <dt className="col-sm-3">Address : </dt>
         <dd className="col-sm-9">{web3State.account}</dd>
+        <dt className="col-sm-3">Balance : </dt>
+        <dd className="col-sm-9">{web3State.balance}</dd>
       </dl>
-      {!web3State.is_logged && (
-        <>
-          <button
-            type="submit"
-            className="btn btn-outline-light"
-            onClick={login}
-          >
-            login
-          </button>
-        </>
-      )}
     </>
   );
 }
 
-export default Connection;
+export default Web3Info;

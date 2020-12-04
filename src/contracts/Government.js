@@ -1,428 +1,383 @@
-export const Government_address = "0x3B8DA59Dbee017290e5ee98c9bDC21dbf55717b5";
+export const Government_address = "0x5c15550e4c0e33d0e0C2f4EaBE5DDa1dCE52E7A9";
 
 export const Government_abi = [
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_tokenAddress",
-        "type": "address"
+        internalType: "address",
+        name: "owner_",
+        type: "address",
       },
       {
-        "internalType": "uint256",
-        "name": "_priceFull",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "priceFull",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    stateMutability: "nonpayable",
+    type: "constructor",
   },
   {
-    "inputs": [],
-    "name": "healthStatusOptions",
-    "outputs": [
+    anonymous: false,
+    inputs: [
       {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    name: "OwnershipTransferred",
+    type: "event",
   },
   {
-    "inputs": [],
-    "name": "howToPunish",
-    "outputs": [
+    inputs: [],
+    name: "owner",
+    outputs: [
       {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_citizenAddress",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
-    "name": "citizen",
-    "outputs": [
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
-        "components": [
+        internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+    ],
+    name: "getCitizen",
+    outputs: [
+      {
+        components: [
           {
-            "internalType": "bool",
-            "name": "isAlive",
-            "type": "bool"
+            internalType: "bool",
+            name: "isAlive",
+            type: "bool",
           },
           {
-            "internalType": "address",
-            "name": "employer",
-            "type": "address"
+            internalType: "address",
+            name: "employer",
+            type: "address",
           },
           {
-            "internalType": "bool",
-            "name": "isWorking",
-            "type": "bool"
+            internalType: "bool",
+            name: "isWorking",
+            type: "bool",
           },
           {
-            "internalType": "bool",
-            "name": "isSick",
-            "type": "bool"
+            internalType: "bool",
+            name: "isSick",
+            type: "bool",
           },
           {
-            "internalType": "uint256",
-            "name": "nbVotes",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "retirementDate",
+            type: "uint256",
           },
           {
-            "internalType": "uint256",
-            "name": "termAdmin",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "nbOfCurrentAccountTokens",
+            type: "uint256",
           },
           {
-            "internalType": "uint256",
-            "name": "retirementDate",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "nbOfHealthInsuranceTokens",
+            type: "uint256",
           },
           {
-            "internalType": "uint256",
-            "name": "termBanned",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "nbOfUnemploymentTokens",
+            type: "uint256",
           },
           {
-            "internalType": "uint256",
-            "name": "nbOfCurrentAccountTokens",
-            "type": "uint256"
+            internalType: "uint256",
+            name: "nbOfRetirementTokens",
+            type: "uint256",
           },
-          {
-            "internalType": "uint256",
-            "name": "nbOfHealthInsuranceTokens",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nbOfUnemploymentTokens",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nbOfRetirementTokens",
-            "type": "uint256"
-          }
         ],
-        "internalType": "struct Government.Citizen",
-        "name": "",
-        "type": "tuple"
-      }
+        internalType: "struct Government.Citizen",
+        name: "",
+        type: "tuple",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [
+    inputs: [],
+    name: "getToken",
+    outputs: [
       {
-        "internalType": "address",
-        "name": "_companyAddress",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
     ],
-    "name": "company",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [],
-    "name": "tokenAddress",
-    "outputs": [
+    inputs: [],
+    name: "sovereign",
+    outputs: [
       {
-        "internalType": "contract CitizenERC20",
-        "name": "",
-        "type": "address"
-      }
+        internalType: "address payable",
+        name: "",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [],
-    "name": "price",
-    "outputs": [
+    inputs: [],
+    name: "price",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_electorAddress",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "hospitalAddress",
+        type: "address",
+      },
     ],
-    "name": "dateVote",
-    "outputs": [
+    name: "checkHospital",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [],
-    "name": "currentMandateTerm",
-    "outputs": [
+    inputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "address",
+        name: "companyAddress",
+        type: "address",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "dateNow",
-    "outputs": [
+    name: "checkCompany",
+    outputs: [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
     ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    stateMutability: "view",
+    type: "function",
+    constant: true,
   },
   {
-    "inputs": [
+    inputs: [],
+    name: "setToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_candidateAddress",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "sentenced",
+        type: "address",
+      },
     ],
-    "name": "elect",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "denaturalize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [],
-    "name": "updateMandate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_adminAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setAdmin",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_sentenced",
-        "type": "address"
+        internalType: "address",
+        name: "concerned",
+        type: "address",
       },
       {
-        "internalType": "enum Government.Punishment",
-        "name": "_option",
-        "type": "uint8"
-      }
+        internalType: "enum Government.HealthStatus",
+        name: "option",
+        type: "uint8",
+      },
     ],
-    "name": "punish",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "changeHealthStatus",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_sentenced",
-        "type": "address"
-      }
+        internalType: "address",
+        name: "concerned",
+        type: "address",
+      },
     ],
-    "name": "denaturalize",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "changeEmploymentStatus",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_beneficiary",
-        "type": "address"
-      }
+        internalType: "uint256",
+        name: "age",
+        type: "uint256",
+      },
     ],
-    "name": "pardon",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "becomeCitizen",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
-    "inputs": [
+    inputs: [],
+    name: "getRetired",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
       {
-        "internalType": "address",
-        "name": "_concerned",
-        "type": "address"
+        internalType: "address",
+        name: "hospitalAddress",
+        type: "address",
+      },
+    ],
+    name: "registerHospital",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "hospitalAddress",
+        type: "address",
+      },
+    ],
+    name: "unregisterHospital",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "companyAddress",
+        type: "address",
+      },
+    ],
+    name: "registerCompany",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "companyAddress",
+        type: "address",
+      },
+    ],
+    name: "unregisterCompany",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "nbTokens",
+        type: "uint256",
+      },
+    ],
+    name: "buyTokens",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+    payable: true,
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "employee",
+        type: "address",
       },
       {
-        "internalType": "enum Government.HealthStatus",
-        "name": "_option",
-        "type": "uint8"
-      }
-    ],
-    "name": "changeHealthStatus",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_concerned",
-        "type": "address"
-      }
-    ],
-    "name": "changeEmploymentStatus",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_companyAddress",
-        "type": "address"
-      }
-    ],
-    "name": "registerCompany",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint8",
-        "name": "_age",
-        "type": "uint8"
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
-      {
-        "internalType": "bool",
-        "name": "_isWorking",
-        "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "_isSick",
-        "type": "bool"
-      }
     ],
-    "name": "becomeCitizen",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    name: "paySalary",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
-  {
-    "inputs": [],
-    "name": "getRetired",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "nbTokens",
-        "type": "uint256"
-      }
-    ],
-    "name": "buyTokens",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "payable",
-    "type": "function",
-    "payable": true
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_employee",
-        "type": "address"
-      }
-    ],
-    "name": "recruit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_employee",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "paySalary",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
 ];
