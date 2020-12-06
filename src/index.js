@@ -5,17 +5,23 @@ import { ChakraProvider, theme } from "@chakra-ui/core";
 import "focus-visible/dist/focus-visible";
 import { Web3Provider } from "./context/Web3Context";
 import { ContractsProvider } from "./context/ContractsContext";
+import { ModeContextProvider } from "./context/ModeContext";
+import { DappProvider } from "./context/DappContext";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme} resetCSS={true}>
-      <Web3Provider>
-        <ContractsProvider>
-          <App />
-        </ContractsProvider>
-      </Web3Provider>
+      <ModeContextProvider>
+        <Web3Provider>
+          <ContractsProvider>
+            <DappProvider>
+              <App />
+            </DappProvider>
+          </ContractsProvider>
+        </Web3Provider>
+      </ModeContextProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

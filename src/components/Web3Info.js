@@ -6,23 +6,21 @@ function Web3Info() {
 
   return (
     <>
-      <dl className="row">
-        <dt className="col-sm-3">Web3 status: </dt>
-        <dd className="col-sm-9">
-          {web3State.is_web3 ? "injected" : "no-injected"}
-        </dd>
-        <dt className="col-sm-3">Network id: : </dt>
-        <dd className="col-sm-9">{web3State.chain_id}</dd>
-        <dt className="col-sm-3">Network name : </dt>
-        <dd className="col-sm-9">{web3State.network_name}</dd>
-        <dt className="col-sm-3">MetaMask installed status : </dt>
-        <dd className="col-sm-9">{web3State.is_metamask ? "yes" : "no"}</dd>
-        <dt className="col-sm-3">Log status : </dt>
-        <dd className="col-sm-9">{web3State.is_logged ? "yes" : "no"}</dd>
-        <dt className="col-sm-3">Address : </dt>
-        <dd className="col-sm-9">{web3State.account}</dd>
-        <dt className="col-sm-3">Balance : </dt>
-        <dd className="col-sm-9">{web3State.balance}</dd>
+      <dl className="mb-3">
+        <dt>Web3 status: </dt>
+        <dd>{web3State.is_web3 ? "injected" : "no-injected"}</dd>
+        <dt>Network id: : </dt>
+        <dd>{web3State.chain_id}</dd>
+        <dt>Network name : </dt>
+        <dd>{web3State.network_name}</dd>
+        <dt>MetaMask installed status : </dt>
+        <dd>{web3State.is_metamask ? "yes" : "no"}</dd>
+        <dt>Log status : </dt>
+        <dd>{web3State.is_logged ? "yes" : "no"}</dd>
+        <dt>Address : </dt>
+        <dd>{web3State.account}</dd>
+        <dt>Balance : </dt>
+        <dd>{web3State.balance}</dd>
       </dl>
     </>
   );

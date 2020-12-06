@@ -1,4 +1,4 @@
-export const Government_address = "0x5c15550e4c0e33d0e0C2f4EaBE5DDa1dCE52E7A9";
+export const Government_address = "0x850071d9eEb608F640b979De9145F522548cD286";
 
 export const Government_abi = [
   {
@@ -23,6 +23,86 @@ export const Government_abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isAlive",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "employer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isWorking",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isSick",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "retirementDate",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "currentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "healthTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "unemploymentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "retirementTokens",
+        type: "uint256",
+      },
+    ],
+    name: "CreatedCitizen",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+    ],
+    name: "LostCitizenship",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "previousOwner",
         type: "address",
       },
@@ -34,6 +114,204 @@ export const Government_abi = [
       },
     ],
     name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "employer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "currentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "healthTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "unemploymentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "retirementTokens",
+        type: "uint256",
+      },
+    ],
+    name: "Paid",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "employer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isWorking",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "currentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "unemploymentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "retirementTokens",
+        type: "uint256",
+      },
+    ],
+    name: "Retired",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "company",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isCompany",
+        type: "bool",
+      },
+    ],
+    name: "SetCompany",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "hospital",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isHospital",
+        type: "bool",
+      },
+    ],
+    name: "SetHospital",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "employer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isWorking",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "currentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "unemploymentTokens",
+        type: "uint256",
+      },
+    ],
+    name: "UpdatedEmployment",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "citizenAddress",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isSick",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "currentTokens",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "healthTokens",
+        type: "uint256",
+      },
+    ],
+    name: "UpdatedHealth",
     type: "event",
   },
   {
@@ -109,22 +387,22 @@ export const Government_abi = [
           },
           {
             internalType: "uint256",
-            name: "nbOfCurrentAccountTokens",
+            name: "currentTokens",
             type: "uint256",
           },
           {
             internalType: "uint256",
-            name: "nbOfHealthInsuranceTokens",
+            name: "healthTokens",
             type: "uint256",
           },
           {
             internalType: "uint256",
-            name: "nbOfUnemploymentTokens",
+            name: "unemploymentTokens",
             type: "uint256",
           },
           {
             internalType: "uint256",
-            name: "nbOfRetirementTokens",
+            name: "retirementTokens",
             type: "uint256",
           },
         ],
