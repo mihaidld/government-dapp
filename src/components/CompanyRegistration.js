@@ -33,7 +33,6 @@ function CompanyRegistration() {
         const filter = government.filters.SetCompany(address);
         // listen once event SetCompany
         government.once(filter, cb);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
@@ -44,8 +43,9 @@ function CompanyRegistration() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -80,17 +80,17 @@ function CompanyRegistration() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Register a Company</h3>
-        <form onSubmit={(e) => handleSubmitRegisterCompany(e)} className="my-5">
-          <div className="mb-3">
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Register a Company</h3>
+        <form onSubmit={(e) => handleSubmitRegisterCompany(e)} className="mb-2">
+          <div className="mb-2">
             <label htmlFor="companyAddress" className="form-label">
               Address of the company
             </label>
@@ -113,12 +113,12 @@ function CompanyRegistration() {
             Register
           </button>
         </form>
-        <h3 className="h2">Unregister a Company</h3>
+        <h3 className="h4 mb-2">Unregister a Company</h3>
         <form
           onSubmit={(e) => handleSubmitUnregisterCompany(e)}
-          className="my-5"
+          className="mb-2"
         >
-          <div className="mb-3">
+          <div className="mb-2">
             <label htmlFor="companyAddress2" className="form-label">
               Address of the company
             </label>

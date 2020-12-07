@@ -39,7 +39,7 @@ function ChangeHealth() {
         getCitizen.isAlive &&
         (numberOption === 0 || numberOption === 1 || numberOption === 2)
       ) {
-        await government.changeHealth(address, numberOption);
+        await government.changeHealthStatus(address, numberOption);
         const cb1 = (citizenAddress) => {
           toast({
             position: "bottom",
@@ -64,7 +64,7 @@ function ChangeHealth() {
               healthTokens
             )} tokens as health insurance`,
             status: "success",
-            duration: 5000,
+            duration: 10000,
             isClosable: true,
           });
         };
@@ -73,7 +73,6 @@ function ChangeHealth() {
         numberOption
           ? government.once(filter2, cb2)
           : government.once(filter1, cb1);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
@@ -84,17 +83,18 @@ function ChangeHealth() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Change health status of a citizen</h3>
-        <form onSubmit={(e) => handleSubmitChangeHealth(e)} className="my-5">
-          <div className="mb-3">
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Change health status of a citizen</h3>
+        <form onSubmit={(e) => handleSubmitChangeHealth(e)} className="mb-2">
+          <div className="mb-2">
             <label htmlFor="option" className="form-label">
               Health status option
             </label>
@@ -106,7 +106,7 @@ function ChangeHealth() {
               aria-label="input address to change health status"
               aria-describedby="buttonChangeHealth"
               required
-              className="form-control"
+              className="form-control mb-2"
             />
             <select
               className={`form-select ${modeButtonClass}`}

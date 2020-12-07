@@ -8,18 +8,36 @@ function Web3Info() {
     <>
       <dl className="mb-3">
         <dt>Web3 status: </dt>
-        <dd>{web3State.is_web3 ? "injected" : "no-injected"}</dd>
+        <dd>
+          {web3State.isWeb3 ? (
+            <span className="badge bg-success">injected</span>
+          ) : (
+            <span className="badge bg-danger">not injected</span>
+          )}
+        </dd>
         <dt>Network id: : </dt>
-        <dd>{web3State.chain_id}</dd>
+        <dd>{web3State.chainId}</dd>
         <dt>Network name : </dt>
-        <dd>{web3State.network_name}</dd>
+        <dd>{web3State.networkName}</dd>
         <dt>MetaMask installed status : </dt>
-        <dd>{web3State.is_metamask ? "yes" : "no"}</dd>
+        <dd>
+          {web3State.isMetaMask ? (
+            <span className="badge bg-success">yes</span>
+          ) : (
+            <span className="badge bg-danger">no</span>
+          )}
+        </dd>
         <dt>Log status : </dt>
-        <dd>{web3State.is_logged ? "yes" : "no"}</dd>
+        <dd>
+          {web3State.isLogged ? (
+            <span className="badge bg-success">yes</span>
+          ) : (
+            <span className="badge bg-danger">no</span>
+          )}
+        </dd>
         <dt>Address : </dt>
         <dd>{web3State.account}</dd>
-        <dt>Balance : </dt>
+        <dt>ETH Balance : </dt>
         <dd>{web3State.balance}</dd>
       </dl>
     </>

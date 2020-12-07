@@ -20,10 +20,7 @@ function BecomeCitizen() {
     try {
       event.preventDefault();
       const age = Number(event.target.elements.age.value);
-      console.log(age === Math.floor(age));
-      console.log(citizen);
       if (age === Math.floor(age) && citizen.isAlive === "not alive") {
-        console.log(typeof age);
         await government.becomeCitizen(age);
         const cb = (
           citizenAddress,
@@ -77,17 +74,17 @@ function BecomeCitizen() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Become a Citizen</h3>
-        <form onSubmit={(e) => handleSubmitBecomeCitizen(e)} className="my-5">
-          <div className="mb-3">
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Become a Citizen</h3>
+        <form onSubmit={(e) => handleSubmitBecomeCitizen(e)} className="mb-2">
+          <div className="mb-2">
             <label htmlFor="age" className="form-label">
               Age (in number of years)
             </label>

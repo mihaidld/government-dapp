@@ -34,7 +34,6 @@ function Denaturalize() {
         const filter = government.filters.LostCitizenship(address);
         // listen once event CreatedCitizen
         government.once(filter, cb);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
@@ -45,17 +44,18 @@ function Denaturalize() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Denaturalize a Citizen</h3>
-        <form onSubmit={(e) => handleSubmitDenaturalize(e)} className="my-5">
-          <div className="mb-3">
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Denaturalize a Citizen</h3>
+        <form onSubmit={(e) => handleSubmitDenaturalize(e)} className="mb-2">
+          <div className="mb-2">
             <label htmlFor="addressCitizen" className="form-label">
               Address of the citizen
             </label>

@@ -19,10 +19,10 @@ function ChangeEmployment() {
   const handleSubmitChangeEmployment = async (event) => {
     try {
       event.preventDefault();
-      const address = event.target.elements.addressCitizen.value;
+      const address = event.target.elements.addressCitizenEmp.value;
       const getCitizen = await government.getCitizen(address);
       if (dappState.isCompany && getCitizen.isAlive) {
-        await government.changeEmployment(address);
+        await government.changeEmploymentStatus(address);
         const cb = (
           citizenAddress,
           employer,
@@ -41,65 +41,51 @@ function ChangeEmployment() {
               unemploymentTokens
             )} tokens as unemployment insurance`,
             status: "success",
-            duration: 5000,
+            duration: 10000,
             isClosable: true,
           });
         };
         const filter = government.filters.UpdatedEmployment(address);
         // listen once event UpdatedEmployment
         government.once(filter, cb);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
-          title: `Change Health`,
+          title: `Change Employment`,
           description: `Only a company can change employment status of a citizen`,
           status: "error",
           duration: 5000,
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Change employment status of a citizen</h3>
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Change employment status of a citizen</h3>
         <form
           onSubmit={(e) => handleSubmitChangeEmployment(e)}
-          className="my-5"
+          className="mb-2"
         >
-          <div className="mb-3">
-            <label htmlFor="option" className="form-label">
-              Employment status option
+          <div className="mb-2">
+            <label htmlFor="addressCitizenEmp" className="form-label">
+              Address of citizen
             </label>
             <input
               type="text"
-              id="addressCitizen"
-              name="addressCitizen"
+              id="addressCitizenEmp"
+              name="addressCitizenEmp"
               placeholder="Enter the address"
               aria-label="input address to change employment status"
               aria-describedby="buttonChangeEmployment"
               required
               className="form-control"
             />
-            {/* <div className="mb-3">
-              <label htmlFor="working" className="form-check-label  mr-3">
-                Check if employed
-              </label>
-              <input
-                type="checkbox"
-                id="working"
-                name="working"
-                className="form-check-input"
-                onChange={(event) => {
-                  setCheckedWorking(event.target.checked);
-                }}
-              />
-              </div>*/}
           </div>
           <button
             id="buttonChangeEmployment"

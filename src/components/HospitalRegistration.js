@@ -33,7 +33,6 @@ function HospitalRegistration() {
         const filter = government.filters.SetHospital(address);
         // listen once event SetHospital
         government.once(filter, cb);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
@@ -44,8 +43,9 @@ function HospitalRegistration() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch(e) {
+      console.log(e.message);
     }
   };
 
@@ -69,7 +69,6 @@ function HospitalRegistration() {
         const filter = government.filters.SetHospital(address);
         // listen once event SetHospital
         government.once(filter, cb);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
@@ -80,17 +79,21 @@ function HospitalRegistration() {
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch (e){
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Register a Hospital</h3>
-        <form onSubmit={(e) => handleSubmitRegisterHospital(e)} className="my-5">
-          <div className="mb-3">
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Register a Hospital</h3>
+        <form
+          onSubmit={(e) => handleSubmitRegisterHospital(e)}
+          className="mb-2"
+        >
+          <div className="mb-2">
             <label htmlFor="hospitalAddress" className="form-label">
               Address of the hospital
             </label>
@@ -113,12 +116,12 @@ function HospitalRegistration() {
             Register
           </button>
         </form>
-        <h3 className="h2">Unregister a Hospital</h3>
+        <h3 className="h4 mb-2">Unregister a Hospital</h3>
         <form
           onSubmit={(e) => handleSubmitUnregisterHospital(e)}
-          className="my-5"
+          className="mb-2"
         >
-          <div className="mb-3">
+          <div className="mb-2">
             <label htmlFor="hospitalAddress2" className="form-label">
               Address of the hospital
             </label>

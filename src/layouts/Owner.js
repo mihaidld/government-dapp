@@ -6,7 +6,7 @@ import Denaturalize from "../components/Denaturalize";
 function Owner() {
   return (
     <>
-      <h2 className="h1">Owner affairs</h2>
+      <h2 className="h2 mb-3">Owner affairs</h2>
       <CompanyRegistration />
       <HospitalRegistration />
       <Denaturalize />

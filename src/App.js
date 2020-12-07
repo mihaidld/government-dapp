@@ -21,7 +21,9 @@ import { ethers } from "ethers";
 function App() {
   const { web3State, login } = useContext(Web3Context);
   const { government } = useContext(ContractsContext);
-  const { dappState, dappDispatch, setCitizen } = useContext(DappContext);
+  const { dappState, dappDispatch, citizen, setCitizen } = useContext(
+    DappContext
+  );
   const { mode } = useContext(ModeContext);
   const modeClass = mode === "dark" ? "bg-dark text-white" : "";
   const modeButtonClass =
@@ -69,20 +71,19 @@ function App() {
       }
     })();
   }, [government, web3State.account, dappDispatch, setCitizen]);
-  console.log("dappState.isCitizen", dappState.isCitizen);
-  if (!web3State.is_web3) {
+  if (!web3State.isWeb3) {
     return <p>Please install MetaMask https://metamask.io/</p>;
   }
   return (
     <div className={`min-vh-100 py-3 ${modeClass}`}>
-      <div className="container my-4">
+      <div className="container">
         <header className="d-flex justify-content-between flex-wrap align-items-center mb-4">
-          <h1 className="display-4 mb-3">Citizen dApp</h1>
+          <h1 className="display-4 mb-3">Citizen DApp</h1>
           <ModeSwitch />
         </header>
         <div className="row">
-          <div className="col-sm-8">
-            {!web3State.is_logged && (
+          <div className="col-md-8">
+            {!web3State.isLogged && (
               <>
                 <button
                   type="submit"
@@ -93,16 +94,63 @@ function App() {
                 </button>
               </>
             )}
-            {web3State.chain_id !== 4 && (
+            {web3State.chainId !== 4 && (
               <p className="mb-5">
                 Please connect to network Rinkeby to interact with Citizen
                 contracts
               </p>
             )}
-            {government !== null && web3State.chain_id === 4 && (
+            {government !== null && web3State.chainId === 4 && (
               <>
+                {dappState.isOwner && (
+                  <p className="mb-3 fst-italic">
+                    Note: You are the sovereign of this country
+                  </p>
+                )}
+                {dappState.isCompany && (
+                  <p className="mb-3 fst-italic">
+                    Note: You are a registered company
+                  </p>
+                )}
+                {dappState.isHospital && (
+                  <p className="mb-3 fst-italic">
+                    Note: You are a registered hospital
+                  </p>
+                )}
+                {citizen.isAlive === "alive" && (
+                  <>
+                    <p className="mb-2 fst-italic">Note: You are a citizen</p>
+                    {/* <dl className="row mb-3">
+                      <dt className="col-sm-6">Life status : </dt>
+                      <dd className="col-sm-6">{citizen.isAlive}</dd>
+                      <dt className="col-sm-6">Employer : </dt>
+                      <dd className="col-sm-6">{citizen.employer}</dd>
+                      <dt className="col-sm-6">Working status : </dt>
+                      <dd className="col-sm-6">{citizen.isWorking}</dd>
+                      <dt className="col-sm-6">Health Status : </dt>
+                      <dd className="col-sm-6">{citizen.isSick}</dd>
+                      <dt className="col-sm-6">Date of retirement : </dt>
+                      <dd className="col-sm-6">
+                        {citizen.retirementDate.toUTCString()}
+                      </dd>
+                      <dt className="col-sm-6">
+                        Nb tokens in current account :{" "}
+                      </dt>
+                      <dd className="col-sm-6">{citizen.currentTokens}</dd>
+                      <dt className="col-sm-6">Health Insurance Tokens : </dt>
+                      <dd className="col-sm-6">{citizen.healthTokens}</dd>
+                      <dt className="col-sm-6">Unemployment Tokens : </dt>
+                      <dd className="col-sm-6">{citizen.unemploymentTokens}</dd>
+                      <dt className="col-sm-6">Retirement Tokens : </dt>
+                      <dd className="col-sm-6">{citizen.retirementTokens}</dd>
+                    </dl> */}
+                  </>
+                )}
                 <Public />
-                {!dappState.isCitizen && <BecomeCitizen />}
+                {!dappState.isCitizen &&
+                  !dappState.isOwner &&
+                  !dappState.isCompany &&
+                  !dappState.isHospital && <BecomeCitizen />}
                 {dappState.isOwner && <Owner />}
                 {dappState.isCompany && <Company />}
                 {dappState.isHospital && <Hospital />}
@@ -110,8 +158,10 @@ function App() {
               </>
             )}
           </div>
-          <div className="col-sm-4 sidebar">
-            <Web3Info />
+          <div className="col-md-4 sidebar">
+            <div className="sticky-top">
+              <Web3Info />
+            </div>
           </div>
         </div>
         <Footer />

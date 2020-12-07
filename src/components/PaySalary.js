@@ -68,7 +68,7 @@ function PaySalary() {
               retirementTokens
             )} tokens as retirement insurance`,
             status: "success",
-            duration: 5000,
+            duration: 15000,
             isClosable: true,
           });
         };
@@ -79,28 +79,28 @@ function PaySalary() {
         );
         // listen once event Paid
         government.once(filter2, cb2);
-        event.target.reset();
       } else {
         toast({
           position: "bottom",
-          title: `Change Health`,
-          description: `Only a hospital can change health status of a citizen to dead, healthy or sick`,
+          title: `Pay Salary Health`,
+          description: `Only a company can pay an employee citizen is it has enough tokens in balance`,
           status: "error",
           duration: 5000,
           isClosable: true,
         });
       }
-    } catch {
-      console.log(event.message);
+      event.target.reset();
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
   return (
     <>
-      <section>
-        <h3 className="h2">Pay salary to an employee</h3>
-        <form onSubmit={(e) => handleSubmitPaySalary(e)} className="my-5">
-          <div className="mb-3">
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Pay salary to an employee</h3>
+        <form onSubmit={(e) => handleSubmitPaySalary(e)} className="mb-2">
+          <div className="mb-2">
             <label htmlFor="addressCitizen" className="form-label">
               Address of the employee
             </label>

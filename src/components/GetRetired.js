@@ -20,7 +20,7 @@ function GetRetired() {
     try {
       const retirementDate = citizen.retirementDate;
       const today = new Date();
-      if (citizen.isAlive === "alive" && retirementDate > today) {
+      if (citizen.isAlive === "alive" && retirementDate <= today) {
         await government.getRetired();
         const cb = (
           citizenAddress,
@@ -72,13 +72,13 @@ function GetRetired() {
 
   return (
     <>
-      <section>
-        <h3 className="h2">Get retired</h3>
+      <section className="mb-3">
+        <h3 className="h4 mb-2">Get retired</h3>
         <button
           id="buttonRetirement"
           type="submit"
           className={modeButtonClass}
-          onSubmit={handleClickGetRetired}
+          onClick={handleClickGetRetired}
         >
           Retire
         </button>
