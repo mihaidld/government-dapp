@@ -25,7 +25,8 @@ function App() {
     DappContext
   );
   const { mode } = useContext(ModeContext);
-  const modeClass = mode === "dark" ? "bg-dark text-white" : "";
+  const modeClass =
+    mode === "dark" ? "bg-dark text-light" : "bg-light text-dark";
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
 
@@ -78,11 +79,11 @@ function App() {
     <div className={`min-vh-100 py-3 ${modeClass}`}>
       <div className="container">
         <header className="d-flex justify-content-between flex-wrap align-items-center mb-4">
-          <h1 className="display-4 mb-3">Citizen DApp</h1>
+          <h1 className="display-4 fw-bold mb-3">Citizen DApp</h1>
           <ModeSwitch />
         </header>
-        <div className="row">
-          <div className="col-md-8">
+        <div className="row mb-5">
+          <div className="col-lg-8">
             {!web3State.isLogged && (
               <>
                 <button
@@ -158,7 +159,7 @@ function App() {
               </>
             )}
           </div>
-          <div className="col-md-4 sidebar">
+          <div className="col-lg-4 sidebar">
             <div className="sticky-top">
               <Web3Info />
             </div>

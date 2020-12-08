@@ -113,10 +113,10 @@ function CompanyRegistration() {
             Register
           </button>
         </form>
-        <h3 className="h4 mb-2">Unregister a Company</h3>
+        <h3 className="h4 mb-2 text-danger">Unregister a Company</h3>
         <form
           onSubmit={(e) => handleSubmitUnregisterCompany(e)}
-          className="mb-2"
+          className="mb-2 text-danger"
         >
           <div className="mb-2">
             <label htmlFor="companyAddress2" className="form-label">

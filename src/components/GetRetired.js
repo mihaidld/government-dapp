@@ -73,7 +73,7 @@ function GetRetired() {
   return (
     <>
       <section className="mb-3">
-        <h3 className="h4 mb-2">Get retired</h3>
+        <h3 className="h4 mb-3">Get retired</h3>
         <button
           id="buttonRetirement"
           type="submit"

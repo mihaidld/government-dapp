@@ -6,10 +6,12 @@ import ChangeEmployment from "../components/ChangeEmployment";
 function Company() {
   return (
     <>
-      <h2 className="h2 mb-3">Company affairs</h2>
-      <BuyTokens />
-      <PaySalary />
-      <ChangeEmployment />
+      <h2 className="h2 mb-3 text-center">Company Management</h2>
+      <div className="shadow-sm rounded p-3 mb-3">
+        <BuyTokens />
+        <PaySalary />
+        <ChangeEmployment />
+      </div>
     </>
   );
 }

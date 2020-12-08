@@ -53,7 +53,7 @@ function Denaturalize() {
   return (
     <>
       <section className="mb-3">
-        <h3 className="h4 mb-2">Denaturalize a Citizen</h3>
+        <h3 className="h4 mb-2 text-danger">Denaturalize a Citizen</h3>
         <form onSubmit={(e) => handleSubmitDenaturalize(e)} className="mb-2">
           <div className="mb-2">
             <label htmlFor="addressCitizen" className="form-label">

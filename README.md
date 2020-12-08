@@ -1,8 +1,70 @@
-# Getting Started with Create React App
+# User Interface for DApp CITIZEN project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Presentation
 
-## Available Scripts
+DApp CITIZEN is a project to create a token economy by using smart contracts deployed on Ethereum blockchain (https://github.com/mihaidld/government-sc) for managing a country and its citizens :
+
+- connexion to the Ethereum network via `MetaMask` provider
+- interaction with the smart contracts using `ethers.js` library.
+- projet set up using `Create React App`
+- styled components with `Bootstrap` and `Chakra UI`
+- modular components to call different functions of the smart contracts using `React Hooks API` (_useState_, _useEffect_, _useContext_, _useReducer_, _useCallback_) and custom hooks
+- responsive, accessible and having a dark mode
+
+## Install
+
+### Install dependencies:
+
+```zsh
+% yarn install
+```
+
+## Run the app in the development mode
+
+```zsh
+% yarn start
+```
+
+## Details of the project
+
+### **token `CITIZEN`**
+
+A token called `CITIZEN` (symbol `CTZ`, 18 decimals) serves as national currency and citizenship point inside this country.  
+100 `CITIZEN` are automatically awarded to any individual who wishes to become a citizen.  
+An entity called `sovereign` is the owner of the state, has the right to register and unregister companies and hospitals, denaturalize citizens and is minted, during token contract deployment, 100% of the supply of `CITIZEN` (1 million `CTZ`). The owner retains the right to `burn` or `mint` tokens `CTZ` in the future in order to regulate the economy.
+
+### **Companies**
+
+To function a company must be registered by the sovereign using its Ethereum address. It can then buy `CTZ` from the sovereign.  
+A company can recruit employees from the registered citizens, pay them salaries in `CITIZEN` tokens and dismiss them.
+
+### **Hospitals**
+
+To function a hospital must be registered by the sovereign using its Ethereum address.  
+A hospital can change the health status of a registered citizens between healthy and sick, and also can declare dead a citizen.
+
+### **The citizens**
+
+The citizens are identified by their Ethereum address and can have different `properties`:
+
+- alive / dead
+- healthy / sick
+- working / unemployed
+- an employer
+- a date when it's possible to ask for retirement etc.
+
+A citizen has also a balance of `CTZ` spread between his `current account`, `unemployment insurance`, `health insurance` and `retirement insurance`. Only the current account is at his disposal.
+
+**Life events :**
+
+- When becoming citizen, he is awarded 100 `CTZ` in his current account.
+- When receiving a salary from his employer 10% of the salary go to his unemployment insurance, 10% to his health insurance, 10% to his retirement insurance and the remaining 70% to his current account.
+- When being dismissed by the employer all unemployment insurance tokens are transfered to his current account.
+- When being declared sick by a hospital all health insurance tokens are transfered to his current account.
+- When requesting for retirement (if has reached retirement age) all unemployment insurance and retirement insurance tokens are transfered to his current account.
+- When being declared dead by a hospital all his tokens are given back to the sovereign.
+
+## Other Available Scripts
 
 In the project directory, you can run:
 
@@ -68,4 +130,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
 # ContactDapp

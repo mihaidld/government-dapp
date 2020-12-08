@@ -44,7 +44,7 @@ function HospitalRegistration() {
         });
       }
       event.target.reset();
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
     }
   };
@@ -80,7 +80,7 @@ function HospitalRegistration() {
         });
       }
       event.target.reset();
-    } catch (e){
+    } catch (e) {
       console.log(e.message);
     }
   };
@@ -116,7 +116,7 @@ function HospitalRegistration() {
             Register
           </button>
         </form>
-        <h3 className="h4 mb-2">Unregister a Hospital</h3>
+        <h3 className="h4 mb-2 text-danger">Unregister a Hospital</h3>
         <form
           onSubmit={(e) => handleSubmitUnregisterHospital(e)}
           className="mb-2"

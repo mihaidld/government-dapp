@@ -9,11 +9,13 @@ import CheckHospital from "../components/CheckHospital";
 function Public() {
   return (
     <>
-      <h2 className="h2 mb-3">Public information</h2>
-      <GetBalance />
-      <GetCitizen />
-      <CheckCompany />
-      <CheckHospital />
+      <h2 className="h2 mb-3 text-center text-primary">Public information</h2>
+      <div className="shadow-sm rounded p-3 mb-3 text-primary">
+        <GetBalance />
+        <GetCitizen />
+        <CheckCompany />
+        <CheckHospital />
+      </div>
     </>
   );
 }
