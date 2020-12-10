@@ -104,23 +104,25 @@ function App() {
             {government !== null && web3State.chainId === 4 && (
               <>
                 {dappState.isOwner && (
-                  <p className="mb-3 fst-italic">
-                    Note: You are the sovereign of this country
+                  <p className="mb-3 fst-italic lead text-center bg-info">
+                    You are the sovereign of this country
                   </p>
                 )}
                 {dappState.isCompany && (
-                  <p className="mb-3 fst-italic">
-                    Note: You are a registered company
+                  <p className="mb-3 fst-italic lead text-center bg-info">
+                    You are a registered company
                   </p>
                 )}
                 {dappState.isHospital && (
-                  <p className="mb-3 fst-italic">
-                    Note: You are a registered hospital
+                  <p className="mb-3 fst-italic lead text-center bg-info">
+                    You are a registered hospital
                   </p>
                 )}
                 {citizen.isAlive === "alive" && (
                   <>
-                    <p className="mb-2 fst-italic">Note: You are a citizen</p>
+                    <p className="mb-2 fst-italic lead text-center bg-info">
+                      You are a citizen
+                    </p>
                     {/* <dl className="row mb-3">
                       <dt className="col-sm-6">Life status : </dt>
                       <dd className="col-sm-6">{citizen.isAlive}</dd>
