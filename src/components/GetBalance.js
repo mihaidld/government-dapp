@@ -44,7 +44,7 @@ function GetBalance() {
       <div className="shadow p-3">
         <h3 className="h4 mb-2">Get the CTZ balance</h3>
         <form onSubmit={handleSubmitBalanceof} className="mb-2">
-          {/* <div className="mb-2 ">
+          <div className="mb-2 ">
             <label className="form-label" htmlFor="addressBalance">
               Enter an address
             </label>
@@ -56,8 +56,8 @@ function GetBalance() {
               aria-describedby="buttonBalance"
               className="form-control"
             />
-          </div> */}
-          <div className="input-group mb-3">
+          </div>
+          {/* <div className="input-group mb-3">
             <label className="input-group-text" htmlFor="addressBalance">
               Enter an address
             </label>
@@ -69,7 +69,7 @@ function GetBalance() {
               aria-describedby="buttonBalance"
               className="form-control"
             />
-          </div>
+          </div> */}
           <button id="buttonBalance" type="submit" className={modeButtonClass}>
             Check balance
           </button>
