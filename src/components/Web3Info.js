@@ -10,50 +10,53 @@ function Web3Info() {
 
   return (
     <>
-      <div className={`card shadow-sm ${modeClass}`}>
+      <div className={`card shadow-sm my-3 ${modeClass}`}>
         <div className="card-body">
-          <dl className="mb-3">
-            <dt>Web3 status: </dt>
-            <dd>
+          <h3 className="h4 text-primary">
+            <span className="badge bg-primary">web3 information</span>
+          </h3>
+          <dl className="row mb-3">
+            <dt className="col-sm-6">Web3 status: </dt>
+            <dd className="col-sm-6">
               {web3State.isWeb3 ? (
-                <span className="badge bg-success">injected</span>
+                <span className={`badge ${modeClass}`}>injected</span>
               ) : (
                 <span className="badge bg-danger">not injected</span>
               )}
             </dd>
-            <dt>Network id: : </dt>
-            <dd>
-              <span className="badge bg-secondary">{web3State.chainId}</span>
+            <dt className="col-sm-6">Network id : </dt>
+            <dd className="col-sm-6">
+              <span className={`badge ${modeClass}`}>{web3State.chainId}</span>
             </dd>
-            <dt>Network name : </dt>
-            <dd>
-              <span className="badge bg-secondary">
+            <dt className="col-sm-6">Network name : </dt>
+            <dd className="col-sm-6">
+              <span className={`badge ${modeClass}`}>
                 {web3State.networkName}
               </span>
             </dd>
-            <dt>MetaMask installed status : </dt>
-            <dd>
+            <dt className="col-sm-6">MetaMask installed : </dt>
+            <dd className="col-sm-6">
               {web3State.isMetaMask ? (
-                <span className="badge bg-success">yes</span>
+                <span className={`badge ${modeClass}`}>yes</span>
               ) : (
                 <span className="badge bg-danger">no</span>
               )}
             </dd>
-            <dt>Log status : </dt>
-            <dd>
+            <dt className="col-sm-6">Log status : </dt>
+            <dd className="col-sm-6">
               {web3State.isLogged ? (
-                <span className="badge bg-success">yes</span>
+                <span className={`badge ${modeClass}`}>yes</span>
               ) : (
                 <span className="badge bg-danger">no</span>
               )}
+            </dd>
+            <dt className="col-sm-6">ETH Balance : </dt>
+            <dd className="col-sm-6">
+              <span className={`badge ${modeClass}`}>{web3State.balance}</span>
             </dd>
             <dt>Address : </dt>
             <dd>
-              <mark className="small">{web3State.account}</mark>
-            </dd>
-            <dt>ETH Balance : </dt>
-            <dd>
-              <span className="badge bg-secondary">{web3State.balance}</span>
+              <mark className={`small ${modeClass}`}>{web3State.account}</mark>
             </dd>
           </dl>
         </div>

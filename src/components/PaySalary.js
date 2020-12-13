@@ -68,7 +68,7 @@ function PaySalary() {
               retirementTokens
             )} tokens as retirement insurance`,
             status: "success",
-            duration: 15000,
+            duration: 10000,
             isClosable: true,
           });
         };
@@ -96,8 +96,8 @@ function PaySalary() {
   };
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Pay salary to an employee</h3>
         <form onSubmit={(e) => handleSubmitPaySalary(e)} className="mb-2">
           <div className="mb-2">
@@ -136,8 +136,8 @@ function PaySalary() {
             Pay Salary
           </button>
         </form>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

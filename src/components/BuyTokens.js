@@ -4,19 +4,8 @@ import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
 import "../form.css";
-import {
-  useToast /*
-  Text,
-  Button,
-  HStack,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,*/,
-} from "@chakra-ui/core";
+import { useToast } from "@chakra-ui/core";
 import { ethers } from "ethers";
-// import { sendEtherTransaction } from "../hooks/web3-utils";
 
 function BuyTokens() {
   const { web3State } = useContext(Web3Context);
@@ -76,8 +65,8 @@ function BuyTokens() {
   };
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Buy Tokens</h3>
         {/*         <form onSubmit={(e) => handleSubmitBuyTokens(e)} className="mb-2">
           <HStack>
@@ -125,8 +114,8 @@ function BuyTokens() {
             Buy Tokens
           </button>
         </form>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

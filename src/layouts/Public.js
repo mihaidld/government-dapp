@@ -8,15 +8,21 @@ import CheckHospital from "../components/CheckHospital";
 
 function Public() {
   return (
-    <>
-      <h2 className="h2 mb-3 text-center text-primary">Public information</h2>
-      <div className="shadow-sm rounded p-3 mb-3 text-primary">
+    <section className="mb-3">
+      <h2 className="h2 text-primary mb-3 pt-3" id="public">
+        <span className="badge bg-primary">Public information</span>
+      </h2>
+      <div className="py-3 mb-3">
         <GetBalance />
         <GetCitizen />
         <CheckCompany />
         <CheckHospital />
+        <p className="text-decoration-underline">
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <a href="#">Back to the top</a>
+        </p>
       </div>
-    </>
+    </section>
   );
 }
 

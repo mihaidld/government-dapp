@@ -35,14 +35,14 @@ function CheckCompany() {
             isClosable: true,
           });
       event.target.reset();
-    } catch(e) {
+    } catch (e) {
       console.log(e.message);
     }
   };
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Check if registered company</h3>
         <form onSubmit={handleSubmitCheckCompany} className="mb-2">
           <div className="mb-2 ">
@@ -66,8 +66,8 @@ function CheckCompany() {
             Check company registration
           </button>
         </form>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

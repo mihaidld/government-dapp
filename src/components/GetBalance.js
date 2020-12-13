@@ -17,8 +17,8 @@ function GetBalance() {
       const address = event.target.elements.addressForBalance.value;
       const res = await token.balanceOf(address);
       setBalance(ethers.utils.formatEther(res));
-      setIsDisplayed(true);
-      event.target.reset();
+      setIsDisplayed(isDisplayed ? false : true);
+      // event.target.reset();
     } catch (e) {
       console.log(e.message);
     }
@@ -40,12 +40,25 @@ function GetBalance() {
   }, []);
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Get the CTZ balance</h3>
         <form onSubmit={handleSubmitBalanceof} className="mb-2">
-          <div className="mb-2 ">
+          {/* <div className="mb-2 ">
             <label className="form-label" htmlFor="addressBalance">
+              Enter an address
+            </label>
+            <input
+              id="addressForBalance"
+              name="addressForBalance"
+              placeholder="address"
+              aria-label="input Address to check token balance"
+              aria-describedby="buttonBalance"
+              className="form-control"
+            />
+          </div> */}
+          <div className="input-group mb-3">
+            <label className="input-group-text" htmlFor="addressBalance">
               Enter an address
             </label>
             <input
@@ -67,8 +80,8 @@ function GetBalance() {
             <dd className="col-sm-6">{balance}</dd>
           </dl>
         )}
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

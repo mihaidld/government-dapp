@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
-import { ModeContext } from "../context/ModeContext";
 import "../form.css";
 import { useToast } from "@chakra-ui/core";
 
 function Denaturalize() {
   const { government } = useContext(ContractsContext);
   const { dappState } = useContext(DappContext);
-  const { mode } = useContext(ModeContext);
-  const modeButtonClass =
-    mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
   const toast = useToast();
 
   const handleSubmitDenaturalize = async (event) => {
@@ -51,9 +47,9 @@ function Denaturalize() {
   };
 
   return (
-    <>
-      <section className="mb-3">
-        <h3 className="h4 mb-2 text-danger">Denaturalize a Citizen</h3>
+    <article className="mb-3">
+      <div className="shadow p-3">
+        <h3 className="h4 mb-2">Denaturalize a Citizen</h3>
         <form onSubmit={(e) => handleSubmitDenaturalize(e)} className="mb-2">
           <div className="mb-2">
             <label htmlFor="addressCitizen" className="form-label">
@@ -73,13 +69,13 @@ function Denaturalize() {
           <button
             id="buttonDenaturalize"
             type="submit"
-            className={modeButtonClass}
+            className="btn btn-outline-danger"
           >
             Denaturalize
           </button>
         </form>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

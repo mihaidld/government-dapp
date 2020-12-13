@@ -87,61 +87,70 @@ function CompanyRegistration() {
 
   return (
     <>
-      <section className="mb-3">
-        <h3 className="h4 mb-2">Register a Company</h3>
-        <form onSubmit={(e) => handleSubmitRegisterCompany(e)} className="mb-2">
-          <div className="mb-2">
-            <label htmlFor="companyAddress" className="form-label">
-              Address of the company
-            </label>
-            <input
-              type="text"
-              id="companyAddress"
-              name="companyAddress"
-              placeholder="Enter company address"
-              aria-label="input address for registering company"
-              aria-describedby="buttonRegisterCompany"
-              required
-              className="form-control"
-            />
-          </div>
-          <button
-            id="buttonRegisterCompany"
-            type="submit"
-            className={modeButtonClass}
+      <article className="mb-3">
+        <div className="shadow p-3">
+          <h3 className="h4 mb-2">Register a Company</h3>
+          <form
+            onSubmit={(e) => handleSubmitRegisterCompany(e)}
+            className="mb-2"
           >
-            Register
-          </button>
-        </form>
-        <h3 className="h4 mb-2 text-danger">Unregister a Company</h3>
-        <form
-          onSubmit={(e) => handleSubmitUnregisterCompany(e)}
-          className="mb-2 text-danger"
-        >
-          <div className="mb-2">
-            <label htmlFor="companyAddress2" className="form-label">
-              Address of the company
-            </label>
-            <input
-              type="text"
-              id="companyAddress2"
-              name="companyAddress2"
-              placeholder="Enter company address"
-              aria-label="input address for unregistering company"
-              aria-describedby="buttonUnregisterCompany"
-              required
-              className="form-control"
-            />
-          </div>
-          <button
-            id="buttonUnregisterCompany"
-            type="submit"
-            className={modeButtonClass}
+            <div className="mb-2">
+              <label htmlFor="companyAddress" className="form-label">
+                Address of the company
+              </label>
+              <input
+                type="text"
+                id="companyAddress"
+                name="companyAddress"
+                placeholder="Enter company address"
+                aria-label="input address for registering company"
+                aria-describedby="buttonRegisterCompany"
+                required
+                className="form-control"
+              />
+            </div>
+            <button
+              id="buttonRegisterCompany"
+              type="submit"
+              className={modeButtonClass}
+            >
+              Register
+            </button>
+          </form>
+        </div>
+      </article>
+      <article className="mb-3">
+        <div className="shadow p-3">
+          <h3 className="h4 mb-2">Unregister a Company</h3>
+          <form
+            onSubmit={(e) => handleSubmitUnregisterCompany(e)}
+            className="mb-2"
           >
-            Unregister
-          </button>
-        </form>
-      </section>
+            <div className="mb-2">
+              <label htmlFor="companyAddress2" className="form-label">
+                Address of the company
+              </label>
+              <input
+                type="text"
+                id="companyAddress2"
+                name="companyAddress2"
+                placeholder="Enter company address"
+                aria-label="input address for unregistering company"
+                aria-describedby="buttonUnregisterCompany"
+                required
+                className="form-control"
+              />
+            </div>
+            <button
+              id="buttonUnregisterCompany"
+              type="submit"
+              className="btn btn-outline-danger"
+            >
+              Unregister
+            </button>
+          </form>
+        </div>
+      </article>
     </>
   );
 }

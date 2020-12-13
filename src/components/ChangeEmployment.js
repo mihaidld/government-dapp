@@ -65,8 +65,8 @@ function ChangeEmployment() {
   };
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Change employment status of a citizen</h3>
         <form
           onSubmit={(e) => handleSubmitChangeEmployment(e)}
@@ -95,8 +95,8 @@ function ChangeEmployment() {
             Change Employment
           </button>
         </form>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

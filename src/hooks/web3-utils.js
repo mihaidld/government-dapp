@@ -44,18 +44,3 @@ export const chainIdtoName = (chainId) => {
       return "unknown";
   }
 };
-
-// send `transaction`, in ethers, from signer address, with as parameter a transaction object (with 2 properties "to" and "value")
-export const sendEtherTransaction = async (signer, provider, transaction) => {
-  try {
-    // send the transaction and return a transaction response
-    const tx = await signer.sendTransaction(transaction);
-    // wait for tx.hash to be mined with 3 block validation and a timeout of 120 seconds
-    // if succeed returns a receipt of the transaction
-    const receipt = await provider.waitForTransaction(tx.hash, 3, 120000);
-    return receipt;
-  } catch (e) {
-    console.log("error sendEtherTransaction :", e);
-    return null;
-  }
-};

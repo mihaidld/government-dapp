@@ -6,8 +6,11 @@ const ModeSwitch = () => {
   const handleModeChange = () => {
     setMode((mode) => (mode === "dark" ? "light" : "dark"));
   };
+  const modeClass =
+    mode === "dark" ? "bg-dark text-light" : "bg-light text-dark";
+
   return (
-    <div className="form-check form-switch">
+    <div className={`form-check form-switch ${modeClass}`}>
       <input
         className="form-check-input"
         type="checkbox"
@@ -16,7 +19,7 @@ const ModeSwitch = () => {
         onChange={handleModeChange}
       />
       <label className="form-check-label" htmlFor="activate">
-        Mode Sombre
+        Dark Mode
       </label>
     </div>
   );

@@ -71,8 +71,8 @@ function GetRetired() {
   };
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-3">Get retired</h3>
         <button
           id="buttonRetirement"
@@ -82,8 +82,8 @@ function GetRetired() {
         >
           Retire
         </button>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

@@ -22,6 +22,7 @@ function GetCitizen() {
     unemploymentTokens: 0,
     retirementTokens: 0,
   });
+  const [isDisplayed, setIsDisplayed] = useState(false);
   const toast = useToast();
 
   const handleSubmitGetCitizen = async (event) => {
@@ -43,6 +44,7 @@ function GetCitizen() {
         unemploymentTokens: ethers.utils.formatEther(res.unemploymentTokens),
         retirementTokens: ethers.utils.formatEther(res.retirementTokens),
       });
+      setIsDisplayed(isDisplayed ? false : true);
       if (!res.isAlive) {
         toast({
           position: "bottom",
@@ -53,7 +55,7 @@ function GetCitizen() {
           isClosable: true,
         });
       }
-      event.target.reset();
+      // event.target.reset();
     } catch (e) {
       console.log(e.message);
     }
@@ -84,8 +86,8 @@ function GetCitizen() {
   }, []);
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Get the details of a citizen</h3>
         <form onSubmit={handleSubmitGetCitizen} className="mb-2">
           <div className="mb-2 ">
@@ -105,7 +107,7 @@ function GetCitizen() {
             Get citizen details
           </button>
         </form>
-        {getCitizen.isAlive === "alive" && (
+        {getCitizen.isAlive === "alive" && isDisplayed && (
           <>
             <p>Below are the details of this citizen</p>
             <dl className="row">
@@ -130,8 +132,8 @@ function GetCitizen() {
             </dl>
           </>
         )}
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

@@ -41,8 +41,8 @@ function CheckHospital() {
   };
 
   return (
-    <>
-      <section className="mb-3">
+    <article className="mb-3">
+      <div className="shadow p-3">
         <h3 className="h4 mb-2">Check if registered hospital</h3>
         <form onSubmit={handleSubmitCheckHospital} className="mb-2">
           <div className="mb-2 ">
@@ -66,8 +66,8 @@ function CheckHospital() {
             Check hospital registration
           </button>
         </form>
-      </section>
-    </>
+      </div>
+    </article>
   );
 }
 

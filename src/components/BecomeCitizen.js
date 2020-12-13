@@ -82,7 +82,9 @@ function BecomeCitizen() {
   return (
     <>
       <section className="mb-3">
-        <h3 className="h4 mb-2">Become a Citizen</h3>
+        <h3 className="h4 mb-2" id="become">
+          Become a Citizen
+        </h3>
         <form onSubmit={(e) => handleSubmitBecomeCitizen(e)} className="mb-2">
           <div className="mb-2">
             <label htmlFor="age" className="form-label">

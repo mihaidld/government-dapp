@@ -3,12 +3,15 @@ import GetRetired from "../components/GetRetired";
 
 function Citizen() {
   return (
-    <>
-      <h2 className="h2 mb-3 text-center">Citizenship</h2>
-      <div className="shadow-sm rounded p-3 mb-3">
+    <section className="mb-3">
+      <hr />
+      <h2 className="h2 text-primary mb-3 pt-3" id="citizenship">
+        <span className="badge bg-primary">Citizenship</span>
+      </h2>
+      <div className="py-3 mb-3">
         <GetRetired />
       </div>
-    </>
+    </section>
   );
 }
 
