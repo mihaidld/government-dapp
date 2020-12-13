@@ -2,14 +2,14 @@
 
 ## Presentation
 
-DApp CITIZEN is a project to create a token economy by using smart contracts deployed on Ethereum blockchain (https://github.com/mihaidld/government-sc) for managing a country and its citizens :
+DApp CITIZEN is a project to create a token economy and manage a fictional country and its citizens by deploying smart contracts on Ethereum blockchain (https://github.com/mihaidld/government-sc) and interacting with them through this dApp :
 
 - connexion to the Ethereum network via `MetaMask` provider
 - interaction with the smart contracts using `ethers.js` library.
 - projet set up using `Create React App`
 - styled components with `Bootstrap` and `Chakra UI`
 - modular components to call different functions of the smart contracts using `React Hooks API` (_useState_, _useEffect_, _useContext_, _useReducer_, _useCallback_) and custom hooks
-- responsive, accessible and having a dark mode
+- responsive, accessible and with a dark mode
 
 ## Install
 
@@ -30,18 +30,24 @@ DApp CITIZEN is a project to create a token economy by using smart contracts dep
 ### **token `CITIZEN`**
 
 A token called `CITIZEN` (symbol `CTZ`, 18 decimals) serves as national currency and citizenship point inside this country.  
-100 `CITIZEN` are automatically awarded to any individual who wishes to become a citizen.  
-An entity called `sovereign` is the owner of the state, has the right to register and unregister companies and hospitals, denaturalize citizens and is minted, during token contract deployment, 100% of the supply of `CITIZEN` (1 million `CTZ`). The owner retains the right to `burn` or `mint` tokens `CTZ` in the future in order to regulate the economy.
+1 ETH == 100 CTZ.  
+100 `CITIZEN` are automatically awarded to any individual who wishes to become a citizen.
+
+### **Sovereign**
+
+An entity called `sovereign` is the owner of the state, has the right to register and unregister companies and hospitals or to denaturalize citizens.  
+It is minted, during token contract deployment, 100% of the total supply (1 million `CTZ`) and retains the right to `burn` or `mint` tokens `CTZ` in the future in order to regulate the economy.
 
 ### **Companies**
 
-To function a company must be registered by the sovereign using its Ethereum address. It can then buy `CTZ` from the sovereign.  
-A company can recruit employees from the registered citizens, pay them salaries in `CITIZEN` tokens and dismiss them.
+A company is identified by its Ethereum address and, in order to function, it must be first registered by the sovereign.  
+It can then buy `CTZ` from the sovereign.  
+A company can recruit employees among the registered citizens, pay them salaries in `CTZ` tokens and dismiss them.
 
 ### **Hospitals**
 
-To function a hospital must be registered by the sovereign using its Ethereum address.  
-A hospital can change the health status of a registered citizens between healthy and sick, and also can declare dead a citizen.
+A hospital is identified by its Ethereum address and, in order to function, it must be first registered by the sovereign.  
+A hospital can change the health status of a registered citizen between healthy and sick, or declare the death of a citizen.
 
 ### **The citizens**
 
@@ -53,16 +59,16 @@ The citizens are identified by their Ethereum address and can have different `pr
 - an employer
 - a date when it's possible to ask for retirement etc.
 
-A citizen has also a balance of `CTZ` spread between his `current account`, `unemployment insurance`, `health insurance` and `retirement insurance`. Only the current account is at his disposal.
+A citizen has also a balance of `CTZ` spread between a `current account`, an `unemployment insurance`, a `health insurance` and a `retirement insurance`. Only the current account is at the citizen's disposal.
 
 **Life events :**
 
-- When becoming citizen, he is awarded 100 `CTZ` in his current account.
-- When receiving a salary from his employer 10% of the salary go to his unemployment insurance, 10% to his health insurance, 10% to his retirement insurance and the remaining 70% to his current account.
-- When being dismissed by the employer all unemployment insurance tokens are transfered to his current account.
-- When being declared sick by a hospital all health insurance tokens are transfered to his current account.
-- When requesting for retirement (if has reached retirement age) all unemployment insurance and retirement insurance tokens are transfered to his current account.
-- When being declared dead by a hospital all his tokens are given back to the sovereign.
+- A `new citizen` is awarded 100 CTZ which go into the current account.
+- The `salary` received from an employer is spread as follows: 10% for unemployment insurance, 10% for health insurance, 10% for retirement insurance and the remaining 70% into the current account.
+- On employer's `dismissal` all unemployment insurance tokens are transfered into the current account.
+- On being declared `sick` by a hospital all health insurance tokens are transfered into the current account.
+- At `retirement` (if above retirement age) all unemployment insurance and retirement insurance tokens are transferred into the current account.
+- On being declared `dead` by a hospital all tokens of the deceased are given back to the sovereign.
 
 ## Other Available Scripts
 

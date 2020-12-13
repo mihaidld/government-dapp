@@ -70,7 +70,7 @@ function Rules() {
               </li>
               <li>
                 A hospital can <em>change the health status</em> of a registered
-                citizen between healthy and sick or to declare the death of a
+                citizen between healthy and sick or declare the death of a
                 citizen.
               </li>
             </ul>
@@ -86,10 +86,10 @@ function Rules() {
               ask for retirement etc.
             </p>
             <p className="mb-2">
-              A citizen has also a balance of CTZ spread between his{" "}
-              <em>current account</em>, <em>unemployment insurance</em>,{" "}
-              <em>health insurance</em> and <em>retirement insurance</em>. Only
-              the current account is at the citizen's disposal.
+              A citizen has also a balance of CTZ spread between a{" "}
+              <em>current account</em>, an <em>unemployment insurance</em>,a{" "}
+              <em>health insurance</em> and a <em>retirement insurance</em>.
+              Only the current account is at the citizen's disposal.
             </p>
             <div>
               <h4 className="h4 mb-2">Life events :</h4>
