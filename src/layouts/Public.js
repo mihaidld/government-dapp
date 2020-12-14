@@ -10,7 +10,7 @@ function Public() {
   return (
     <section className="mb-3">
       <h2 className="h2 text-primary mb-3 pt-3" id="public">
-        <span className="badge bg-primary">Public information</span>
+        <span className="badge bg-primary">Public Information</span>
       </h2>
       <div className="py-3 mb-3">
         <GetBalance />

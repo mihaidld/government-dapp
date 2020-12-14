@@ -8,7 +8,7 @@ function Owner() {
     <section className="mb-3">
       <hr />
       <h2 className="h2 text-primary mb-3 pt-3" id="owner">
-        <span className="badge bg-primary">Sovereign functions</span>
+        <span className="badge bg-primary">Sovereign Functions</span>
       </h2>
       <div className="py-3 mb-3">
         <CompanyRegistration />

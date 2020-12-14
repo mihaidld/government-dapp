@@ -8,7 +8,7 @@ function Company() {
     <section className="mb-3">
       <hr />
       <h2 className="h2 text-primary mb-3 pt-3" id="company">
-        <span className="badge bg-primary">Business</span>
+        <span className="badge bg-primary">Business Management</span>
       </h2>
       <div className="py-3 mb-3">
         <BuyTokens />

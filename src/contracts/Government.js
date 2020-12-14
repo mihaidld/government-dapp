@@ -1,4 +1,4 @@
-export const Government_address = "0x850071d9eEb608F640b979De9145F522548cD286";
+export const Government_address = "0x31125f714333CDbA54FB5B09ba220bB6FbD36540";
 
 export const Government_abi = [
   {

@@ -121,21 +121,21 @@ function App() {
               {dappState.isOwner && (
                 <li className="nav-item">
                   <a className="nav-link" href="#owner">
-                    Owner Management
+                    Sovereign Functions
                   </a>
                 </li>
               )}
               {dappState.isCompany && (
                 <li className="nav-item">
                   <a className="nav-link" href="#company">
-                    Company Management
+                    Business Management
                   </a>
                 </li>
               )}
               {dappState.isHospital && (
                 <li className="nav-item">
                   <a className="nav-link" href="#hospital">
-                    Hospital Management
+                    Healthcare Management
                   </a>
                 </li>
               )}
