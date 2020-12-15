@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { Web3Context } from "./context/Web3Context";
 import { ContractsContext } from "./context/ContractsContext";
@@ -31,6 +31,10 @@ function App() {
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
   const modeNavbarClass =
     mode === "dark" ? "navbar-dark bg-dark" : "navbar-light bg-light";
+
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
   // check role of the connected account (citize, company etc.) and if citizen fetch its properties,
   useEffect(() => {
@@ -102,12 +106,16 @@ function App() {
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
-            aria-expanded="false"
+            aria-expanded={!isNavCollapsed ? true : false}
             aria-label="Toggle navigation"
+            onClick={handleNavCollapse}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div
+            className={`${isNavCollapsed ? "collapse" : ""} navbar-collapse`}
+            id="navbarSupportedContent"
+          >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a className="nav-link" aria-current="page" href="#public">
