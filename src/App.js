@@ -84,9 +84,16 @@ function App() {
   if (!web3State.isWeb3) {
     return (
       <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-        <p className="text-danger h5">
-          To interact with Citizen contracts please install MetaMask at :
-          https://metamask.io/
+        <p className="text-danger">
+          To interact with Citizen contracts please install{" "}
+          <a
+            target="_blank"
+            rel="noreferrer noopener"
+            className="fw-bold"
+            href="https://metamask.io"
+          >
+            MetaMask
+          </a>
         </p>
       </div>
     );
