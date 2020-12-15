@@ -36,7 +36,7 @@ function App() {
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
-  // check role of the connected account (citize, company etc.) and if citizen fetch its properties,
+  // check role of the connected account (citizen, company etc.) and if citizen fetch its properties,
   useEffect(() => {
     (async function fetchAddressInfo() {
       try {
@@ -82,7 +82,14 @@ function App() {
 
   // if web3 is not injected display message with link to MetaMask website
   if (!web3State.isWeb3) {
-    return <p>Please install MetaMask https://metamask.io/</p>;
+    return (
+      <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        <p className="text-danger h5">
+          To interact with Citizen contracts please install MetaMask at :
+          https://metamask.io/
+        </p>
+      </div>
+    );
   }
   // if web3 injected
   return (
