@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 
-// web3 reducer
+// web3 reducer to check web3 connection
 export const web3Reducer = (state, action) => {
   switch (action.type) {
     case "SET_isWeb3":

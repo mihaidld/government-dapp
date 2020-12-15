@@ -1,6 +1,7 @@
 import React from "react";
 import ChangeHealth from "../components/ChangeHealth";
 
+// Layout displayed only to registered hospitals
 function Hospital() {
   return (
     <section className="mb-3">

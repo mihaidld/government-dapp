@@ -3,15 +3,18 @@ import { ContractsContext } from "../context/ContractsContext";
 import { ModeContext } from "../context/ModeContext";
 import { useToast } from "@chakra-ui/core";
 
-/* TODO: consider using useReducer and context for contracts */
-
 function CheckCompany() {
+  // consume context
+  const { government } = useContext(ContractsContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
-  const { government } = useContext(ContractsContext);
+
   const toast = useToast();
 
+  // define event handler for submitting form and give feeback to users on company registration status
   const handleSubmitCheckCompany = async (event) => {
     try {
       event.preventDefault();

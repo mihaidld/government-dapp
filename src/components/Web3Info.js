@@ -3,8 +3,11 @@ import { Web3Context } from "../context/Web3Context";
 import { ModeContext } from "../context/ModeContext";
 
 function Web3Info() {
+  // consume context
   const { web3State } = useContext(Web3Context);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeClass =
     mode === "dark" ? "bg-dark text-light" : "bg-light text-dark";
 
@@ -13,10 +16,10 @@ function Web3Info() {
       <div className={`card shadow-sm my-3 ${modeClass}`}>
         <div className="card-body">
           <h3 className="h4 text-primary">
-            <span className="badge bg-primary">web3 information</span>
+            <span className="badge bg-primary">Web3 Information</span>
           </h3>
           <dl className="row mb-3">
-            <dt className="col-sm-6">Web3 status: </dt>
+            <dt className="col-sm-6">Web3 Status: </dt>
             <dd className="col-sm-6">
               {web3State.isWeb3 ? (
                 <span className={`badge ${modeClass}`}>injected</span>
@@ -24,11 +27,11 @@ function Web3Info() {
                 <span className="badge bg-danger">not injected</span>
               )}
             </dd>
-            <dt className="col-sm-6">Network id : </dt>
+            <dt className="col-sm-6">Network Id : </dt>
             <dd className="col-sm-6">
               <span className={`badge ${modeClass}`}>{web3State.chainId}</span>
             </dd>
-            <dt className="col-sm-6">Network name : </dt>
+            <dt className="col-sm-6">Network Name : </dt>
             <dd className="col-sm-6">
               <span className={`badge ${modeClass}`}>
                 {web3State.networkName}
@@ -42,7 +45,7 @@ function Web3Info() {
                 <span className="badge bg-danger">no</span>
               )}
             </dd>
-            <dt className="col-sm-6">Log status : </dt>
+            <dt className="col-sm-6">Log Status : </dt>
             <dd className="col-sm-6">
               {web3State.isLogged ? (
                 <span className={`badge ${modeClass}`}>yes</span>

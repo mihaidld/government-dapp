@@ -4,13 +4,16 @@ import { ModeContext } from "../context/ModeContext";
 import { ethers } from "ethers";
 import { useToast } from "@chakra-ui/core";
 
-/* TODO: consider using useReducer and context for contracts */
-
 function GetCitizen() {
+  // consume context
+  const { government } = useContext(ContractsContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
-  const { government } = useContext(ContractsContext);
+
+  //define state variables to set retrieved citizen properties or display status
   const [getCitizen, setGetCitizen] = useState({
     isAlive: false,
     employer: ethers.constants.AddressZero,
@@ -23,8 +26,11 @@ function GetCitizen() {
     retirementTokens: 0,
   });
   const [isDisplayed, setIsDisplayed] = useState(false);
+
   const toast = useToast();
 
+  /* define event handler for submitting form to set state and give feeback to
+  users if there is no registered citizen at that address */
   const handleSubmitGetCitizen = async (event) => {
     try {
       event.preventDefault();
@@ -61,7 +67,7 @@ function GetCitizen() {
     }
   };
 
-  // listen for address change event to reset getCitizen and hide citizens details
+  // listen for address change event to reset retrieved citizen properties
   useEffect(() => {
     const onAccountsChanged = async (accounts) => {
       try {
@@ -111,17 +117,17 @@ function GetCitizen() {
           <>
             <p>Below are the details of this citizen</p>
             <dl className="row">
-              <dt className="col-sm-6">Life status : </dt>
+              <dt className="col-sm-6">Life Status : </dt>
               <dd className="col-sm-6">{getCitizen.isAlive}</dd>
               <dt className="col-sm-6">Employer : </dt>
               <dd className="col-sm-6">{getCitizen.employer}</dd>
-              <dt className="col-sm-6">Working status : </dt>
+              <dt className="col-sm-6">Working Status : </dt>
               <dd className="col-sm-6">{getCitizen.isWorking}</dd>
               <dt className="col-sm-6">Health Status : </dt>
               <dd className="col-sm-6">{getCitizen.isSick}</dd>
-              <dt className="col-sm-6">Date of retirement : </dt>
+              <dt className="col-sm-6">Date of Retirement : </dt>
               <dd className="col-sm-6">{getCitizen.retirementDate}</dd>
-              <dt className="col-sm-6">Nb tokens in current account : </dt>
+              <dt className="col-sm-6">Current Account Tokens : </dt>
               <dd className="col-sm-6">{getCitizen.currentTokens}</dd>
               <dt className="col-sm-6">Health Insurance Tokens : </dt>
               <dd className="col-sm-6">{getCitizen.healthTokens}</dd>

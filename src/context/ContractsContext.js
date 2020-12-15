@@ -6,7 +6,7 @@ import { useContract } from "../hooks/useContract";
 // Contracts context
 export const ContractsContext = createContext(null);
 
-// Contracts provider
+// Contracts provider to connect to deployed contracts
 export const ContractsProvider = ({ children }) => {
   const token = useContract(Token_address, Token_abi);
   const government = useContract(Government_address, Government_abi);

@@ -2,23 +2,28 @@ import React, { useContext } from "react";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-import "../form.css";
 import { useToast } from "@chakra-ui/core";
 import { ethers } from "ethers";
 
 function ChangeHealth() {
+  // consume context
   const { government } = useContext(ContractsContext);
   const { dappState } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  // define event handler for submitting form with security check to prevent reaching revert from the blockchain
   const handleSubmitChangeHealth = async (event) => {
     try {
       event.preventDefault();
-      const address = event.target.elements.addressCitizen.value;
+      const address = event.target.elements.addressCitizenHe.value;
       const option = event.target.elements.option.value;
+      //define numberOption local variable assigned a diffrent value depending on option chosen
       let numberOption;
       switch (option) {
         case "dead":
@@ -40,6 +45,9 @@ function ChangeHealth() {
         (numberOption === 0 || numberOption === 1 || numberOption === 2)
       ) {
         await government.changeHealthStatus(address, numberOption);
+
+        /* callback function with same arguments as those of LostCitizenship
+        event emitted by contract Government, gives feeback to users after an action has taken place */
         const cb1 = (citizenAddress) => {
           toast({
             position: "bottom",
@@ -50,8 +58,11 @@ function ChangeHealth() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter1 = government.filters.LostCitizenship(address);
 
+        /* callback function with same arguments as those of UpdatedHealth
+        event emitted by contract Government, gives feeback to users after an action has taken place */
         const cb2 = (citizenAddress, isSick, currentTokens, healthTokens) => {
           toast({
             position: "bottom",
@@ -68,8 +79,9 @@ function ChangeHealth() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter2 = government.filters.UpdatedHealth(address);
-        // listen once event UpdatedHealth or LostCitizenship
+        // listen once event UpdatedHealth or LostCitizenship with ternary operator based on numberOption value
         numberOption
           ? government.once(filter2, cb2)
           : government.once(filter1, cb1);
@@ -100,8 +112,8 @@ function ChangeHealth() {
             </label>
             <input
               type="text"
-              id="addressCitizen"
-              name="addressCitizen"
+              id="addressCitizenHe"
+              name="addressCitizenHe"
               placeholder="Enter the address"
               aria-label="input address to change health status"
               aria-describedby="buttonChangeHealth"

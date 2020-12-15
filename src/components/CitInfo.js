@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Web3Context } from "../context/Web3Context";
 import { ModeContext } from "../context/ModeContext";
 import { DappContext } from "../context/DappContext";
@@ -6,20 +6,25 @@ import { ContractsContext } from "../context/ContractsContext";
 import { ethers } from "ethers";
 import { IconContext } from "react-icons";
 import { FaHospital, FaChessKing, FaBuilding, FaVoteYea } from "react-icons/fa";
-// import { IoIosBusiness, IoPerson } from "react-icons/io";
 
 function CitInfo() {
+  // consume context
   const { web3State } = useContext(Web3Context);
   const { dappState, citizen } = useContext(DappContext);
   const { token } = useContext(ContractsContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeClass =
     mode === "dark" ? "bg-dark text-light" : "bg-light text-dark";
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
+  //define state variables to set balance or display status
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [balance, setBalance] = useState("0");
 
+  // define event handler to set state
   const handleClickGetDetails = async () => {
     try {
       const res = await token.balanceOf(web3State.account);
@@ -30,6 +35,23 @@ function CitInfo() {
     }
   };
 
+  // listen for address change event (changing account) to hide previous balance result
+  useEffect(() => {
+    const onAccountsChanged = async (accounts) => {
+      try {
+        setIsDisplayed(false);
+      } catch (e) {
+        throw e;
+      }
+    };
+    onAccountsChanged();
+    window.ethereum.on("accountsChanged", onAccountsChanged);
+    return () => window.ethereum.off("accountsChanged", onAccountsChanged);
+  }, []);
+
+  /* with conditional rendering depending on the account display its role,
+  corresponding react icon and details (CTZ balance and, if citizen, citizen
+  properties)*/
   return (
     <>
       <div className={`card shadow-sm mb-2 ${modeClass}`}>
@@ -102,17 +124,17 @@ function CitInfo() {
             )}
             {isDisplayed && citizen.isAlive === "alive" && (
               <dl>
-                <dt>Life status : </dt>
+                <dt>Life Status : </dt>
                 <dd>{citizen.isAlive}</dd>
                 <dt>Employer : </dt>
                 <dd>{citizen.employer}</dd>
-                <dt>Working status : </dt>
+                <dt>Working Status : </dt>
                 <dd>{citizen.isWorking}</dd>
                 <dt>Health Status : </dt>
                 <dd>{citizen.isSick}</dd>
-                <dt>Date of retirement : </dt>
+                <dt>Date of Retirement : </dt>
                 <dd>{citizen.retirementDate.toUTCString()}</dd>
-                <dt>Nb tokens in current account : </dt>
+                <dt>Current Account Tokens : </dt>
                 <dd>{citizen.currentTokens}</dd>
                 <dt>Health Insurance Tokens : </dt>
                 <dd>{citizen.healthTokens}</dd>

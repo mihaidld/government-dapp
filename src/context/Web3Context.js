@@ -4,7 +4,7 @@ import { useWeb3 } from "../hooks/useWeb3";
 // Web3 context
 export const Web3Context = createContext(null);
 
-// Web3 provider
+// Web3 provider to update web3 connection
 export const Web3Provider = ({ children }) => {
   return (
     <>

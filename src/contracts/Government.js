@@ -1,5 +1,7 @@
+// Address of deployed Government contract
 export const Government_address = "0x31125f714333CDbA54FB5B09ba220bB6FbD36540";
 
+// Application binary interface of deployed Government contract
 export const Government_abi = [
   {
     inputs: [

@@ -3,6 +3,7 @@ import CompanyRegistration from "../components/CompanyRegistration";
 import HospitalRegistration from "../components/HospitalRegistration";
 import Denaturalize from "../components/Denaturalize";
 
+// Layout displayed only to the sovereign (owner)
 function Owner() {
   return (
     <section className="mb-3">

@@ -1,12 +1,16 @@
+// Utility Functions
+
+// Check if web3 is injected
 export const isWeb3 = () => {
   return typeof window.ethereum !== "undefined" ? true : false;
 };
 
+// Check if MetaMask is installed
 export const isMetaMask = () => {
   return window.ethereum.isMetaMask ? true : false;
 };
 
-// return account if connected
+// Return account if connected
 export const getAccounts = async () => {
   try {
     return await window.ethereum.request({
@@ -17,7 +21,7 @@ export const getAccounts = async () => {
   }
 };
 
-// login attempt, if success return array of account
+// Login attempt, if success return array of one account
 export const loginToMetaMask = async () => {
   try {
     return await window.ethereum.request({
@@ -28,6 +32,7 @@ export const loginToMetaMask = async () => {
   }
 };
 
+// Change network id to its name
 export const chainIdtoName = (chainId) => {
   switch (chainId) {
     case 1:

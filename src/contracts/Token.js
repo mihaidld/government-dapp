@@ -1,5 +1,7 @@
+// Address of deployed Token contract
 export const Token_address = "0x311D0fd2f84410dfCaD52c3e80305d4566a792a3";
 
+// Application binary interface of deployed Token contract
 export const Token_abi = [
   {
     inputs: [

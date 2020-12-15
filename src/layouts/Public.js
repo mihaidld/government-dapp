@@ -4,8 +4,7 @@ import GetBalance from "../components/GetBalance";
 import CheckCompany from "../components/CheckCompany";
 import CheckHospital from "../components/CheckHospital";
 
-/* TODO: consider using useReducer and context for contracts */
-
+// Layout displayed to everyone logged in to MetaMask with getter functions to view State variables
 function Public() {
   return (
     <section className="mb-3">

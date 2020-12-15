@@ -3,25 +3,33 @@ import { Web3Context } from "../context/Web3Context";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-import "../form.css";
 import { useToast } from "@chakra-ui/core";
 import { ethers } from "ethers";
 
 function GetRetired() {
+  // consume context
   const { web3State } = useContext(Web3Context);
   const { government } = useContext(ContractsContext);
   const { citizen, setCitizen } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  // define event handler for submitting form with security check to prevent reaching revert from the blockchain
   const handleClickGetRetired = async () => {
     try {
       const retirementDate = citizen.retirementDate;
       const today = new Date();
       if (citizen.isAlive === "alive" && retirementDate <= today) {
         await government.getRetired();
+
+        /* callback function with same arguments as those of Retired
+        event emitted by contract Government, sets state and gives feeback to
+        users after an action has taken place */
         const cb = (
           citizenAddress,
           employer,
@@ -52,8 +60,9 @@ function GetRetired() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.Retired(web3State.account);
-        // listen once event Retired
+        // listen once event Retired searching for entries which match the filter
         government.once(filter, cb);
       } else {
         toast({

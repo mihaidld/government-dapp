@@ -2,17 +2,22 @@ import React, { useContext } from "react";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-import "../form.css";
 import { useToast } from "@chakra-ui/core";
 
 function HospitalRegistration() {
+  // consume context
   const { government } = useContext(ContractsContext);
   const { dappState } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  /* define event handler for submitting form to register a hospital with
+  security check to prevent reaching revert from the blockchain */
   const handleSubmitRegisterHospital = async (event) => {
     try {
       event.preventDefault();
@@ -20,6 +25,10 @@ function HospitalRegistration() {
       const isAHospital = await government.checkHospital(address);
       if (dappState.isOwner && !isAHospital) {
         await government.registerHospital(address);
+
+        /* callback function with same arguments as those of SetHospital event
+        emitted by contract Government, gives feeback to users after an action
+        has taken place */
         const cb = (hospital, isHospital) => {
           toast({
             position: "bottom",
@@ -30,8 +39,9 @@ function HospitalRegistration() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.SetHospital(address);
-        // listen once event SetHospital
+        // listen once event SetHospital searching for entries which match the filter
         government.once(filter, cb);
       } else {
         toast({
@@ -49,6 +59,8 @@ function HospitalRegistration() {
     }
   };
 
+  /* define event handler for submitting form to unregister a hospital with
+  security check to prevent reaching revert from the blockchain */
   const handleSubmitUnregisterHospital = async (event) => {
     try {
       event.preventDefault();
@@ -56,6 +68,10 @@ function HospitalRegistration() {
       const isAHospital = await government.checkHospital(address);
       if (dappState.isOwner && isAHospital) {
         await government.unregisterHospital(address);
+
+        /* callback function with same arguments as those of SetHospital event
+        emitted by contract Government, gives feeback to users after an action
+        has taken place */
         const cb = (hospital, isHospital) => {
           toast({
             position: "bottom",
@@ -66,8 +82,9 @@ function HospitalRegistration() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.SetHospital(address);
-        // listen once event SetHospital
+        // listen once event SetHospital searching for entries which match the filter
         government.once(filter, cb);
       } else {
         toast({
@@ -118,7 +135,7 @@ function HospitalRegistration() {
             </button>
           </form>
         </div>
-      </article>{" "}
+      </article>
       <article className="mb-3">
         <div className="shadow p-3">
           <h3 className="h4 mb-2">Unregister a Hospital</h3>

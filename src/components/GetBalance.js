@@ -4,13 +4,19 @@ import { ModeContext } from "../context/ModeContext";
 import { ethers } from "ethers";
 
 function GetBalance() {
+  // consume context
+  const { token } = useContext(ContractsContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
-  const { token } = useContext(ContractsContext);
+
+  //define state variables to set balance or display status
   const [balance, setBalance] = useState("0");
   const [isDisplayed, setIsDisplayed] = useState(false);
 
+  // define event handler to set state
   const handleSubmitBalanceof = async (event) => {
     try {
       event.preventDefault();
@@ -24,11 +30,10 @@ function GetBalance() {
     }
   };
 
-  // listen for address change event to reset balance and hide it
+  // listen for address change event (changing account) to hide previous balance result
   useEffect(() => {
     const onAccountsChanged = async (accounts) => {
       try {
-        //setBalance("0");
         setIsDisplayed(false);
       } catch (e) {
         throw e;
@@ -57,19 +62,6 @@ function GetBalance() {
               className="form-control"
             />
           </div>
-          {/* <div className="input-group mb-3">
-            <label className="input-group-text" htmlFor="addressBalance">
-              Enter an address
-            </label>
-            <input
-              id="addressForBalance"
-              name="addressForBalance"
-              placeholder="address"
-              aria-label="input Address to check token balance"
-              aria-describedby="buttonBalance"
-              className="form-control"
-            />
-          </div> */}
           <button id="buttonBalance" type="submit" className={modeButtonClass}>
             Check balance
           </button>

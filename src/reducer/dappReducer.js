@@ -1,3 +1,4 @@
+//dapp reducer to check role of connected account
 export const dappReducer = (state, action) => {
   switch (action.type) {
     case "SET_isCitizen":
@@ -13,6 +14,7 @@ export const dappReducer = (state, action) => {
   }
 };
 
+// dapp initial state
 export const initialDappState = {
   isCitizen: false,
   isCompany: false,

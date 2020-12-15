@@ -1,6 +1,7 @@
 import React from "react";
 import GetRetired from "../components/GetRetired";
 
+// Layout displayed only to registered citizens
 function Citizen() {
   return (
     <section className="mb-3">

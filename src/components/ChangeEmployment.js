@@ -1,28 +1,42 @@
 import React, { useContext } from "react";
+import { Web3Context } from "../context/Web3Context";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-import "../form.css";
 import { useToast } from "@chakra-ui/core";
 import { ethers } from "ethers";
 
-/* TODO: toggle employed */
-
 function ChangeEmployment() {
+  // consume context
+  const { web3State } = useContext(Web3Context);
   const { government } = useContext(ContractsContext);
   const { dappState } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  // define event handler for submitting form with security check to prevent reaching revert from the blockchain
   const handleSubmitChangeEmployment = async (event) => {
     try {
       event.preventDefault();
       const address = event.target.elements.addressCitizenEmp.value;
       const getCitizen = await government.getCitizen(address);
-      if (dappState.isCompany && getCitizen.isAlive) {
+      if (
+        dappState.isCompany &&
+        getCitizen.isAlive &&
+        (!getCitizen.isWorking ||
+          (getCitizen.isWorking &&
+            web3State.account === getCitizen.employer.toLowerCase()))
+      ) {
         await government.changeEmploymentStatus(address);
+
+        /* callback function with same arguments as those of UpdatedEmployment
+        event emitted by contract Government, gives feeback to
+        users after an action has taken place */
         const cb = (
           citizenAddress,
           employer,
@@ -45,14 +59,15 @@ function ChangeEmployment() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.UpdatedEmployment(address);
-        // listen once event UpdatedEmployment
+        // listen once event UpdatedEmployment searching for entries which match the filter
         government.once(filter, cb);
       } else {
         toast({
           position: "bottom",
           title: `Change Employment`,
-          description: `Only a company can change employment status of a citizen`,
+          description: `Only a company can change employment status of a citizen : to working (if not working), to unemployed (if its employee)`,
           status: "error",
           duration: 5000,
           isClosable: true,

@@ -3,23 +3,27 @@ import { Web3Context } from "../context/Web3Context";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-import "../form.css";
 import { useToast } from "@chakra-ui/core";
 import { ethers } from "ethers";
 
 function PaySalary() {
+  // consume context
   const { web3State } = useContext(Web3Context);
   const { token, government } = useContext(ContractsContext);
   const { dappState } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  // define event handler for submitting form with security check to prevent reaching revert from the blockchain
   const handleSubmitPaySalary = async (event) => {
     try {
       event.preventDefault();
-      const address = event.target.elements.addressCitizen.value;
+      const address = event.target.elements.addressCitizenSa.value;
       const amount = event.target.elements.amount.value;
       const getCitizen = await government.getCitizen(address);
       const nbTokens = ethers.utils.parseEther(amount);
@@ -29,6 +33,9 @@ function PaySalary() {
         token.balanceOf(web3State.account) >= nbTokens
       ) {
         await government.paySalary(address, nbTokens);
+
+        /* callback function with same arguments as those of Transfer (from ERC777 and actually IERC20)
+        event emitted by contract Token, gives feeback to users after an action has taken place */
         const cb1 = (from, to, value) => {
           toast({
             position: "bottom",
@@ -41,9 +48,14 @@ function PaySalary() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter1 = token.filters.Transfer(web3State.account, address);
-        // listen once event Transfer
+        // listen once event Transfer searching for entries which match the filter
         token.once(filter1, cb1);
+
+        /* callback function with same arguments as those of Paid event emitted
+        by contract Government, gives feeback to users after an action has taken
+        place */
         const cb2 = (
           citizenAddress,
           amount,
@@ -72,12 +84,13 @@ function PaySalary() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter2 = government.filters.Paid(
           address,
           nbTokens,
           web3State.account
         );
-        // listen once event Paid
+        // listen once event Paid searching for entries which match the filter
         government.once(filter2, cb2);
       } else {
         toast({
@@ -101,13 +114,13 @@ function PaySalary() {
         <h3 className="h4 mb-2">Pay salary to an employee</h3>
         <form onSubmit={(e) => handleSubmitPaySalary(e)} className="mb-2">
           <div className="mb-2">
-            <label htmlFor="addressCitizen" className="form-label">
+            <label htmlFor="addressCitizenSa" className="form-label">
               Address of the employee
             </label>
             <input
               type="text"
-              id="addressCitizen"
-              name="addressCitizen"
+              id="addressCitizenSa"
+              name="addressCitizenSa"
               placeholder="Enter the address"
               aria-label="input address to pay salary"
               aria-describedby="buttonPaySalary"

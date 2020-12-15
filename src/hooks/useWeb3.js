@@ -9,12 +9,11 @@ import {
 } from "./web3-utils";
 import { web3Reducer, web3InitialState } from "../reducer/web3Reducer";
 
-// web3 hook
+// Web3 hook for web3State and login function
 export const useWeb3 = (endpoint) => {
   const [web3State, web3Dispatch] = useReducer(web3Reducer, web3InitialState);
 
-  // login in to MetaMask manually.
-  // TODO: Check for login on other wallet
+  // Login in to MetaMask manually (if user decides to do it)
   const login = useCallback(async () => {
     try {
       if (web3State.isWeb3 && !web3State.isLogged) {
@@ -29,22 +28,17 @@ export const useWeb3 = (endpoint) => {
     }
   }, [web3State.isWeb3, web3State.isLogged]);
 
-  // Check if web3 is injected
-  // TODO: maybe can check on each render (case of user uninstalling metamask)
+  // Check if web3 is injected by calling isWeb3
   useEffect(() => {
-    console.log("hooks: isWeb3 called");
     web3Dispatch({ type: "SET_isWeb3", isWeb3: isWeb3() });
   }, []);
 
-  // Listen for networks changes events
+  // Listen for networks change events emitted by MetaMask provider (when currently connected chain changes)
   useEffect(() => {
     if (web3State.isWeb3) {
-      console.log("network listener called");
       const onChainChanged = async (chainId) => {
         const _chainId = parseInt(Number(chainId), 10);
         const _networkName = chainIdtoName(_chainId);
-        console.log("network id changed:", _chainId);
-        console.log("network name changed:", _networkName);
         web3Dispatch({
           type: "SET_chainId",
           chainId: _chainId,
@@ -60,14 +54,14 @@ export const useWeb3 = (endpoint) => {
     }
   }, [web3State.isWeb3]);
 
-  // Check if metamask is installed
+  // Check if metamask is installed by calling isMetaMask
   useEffect(() => {
     if (web3State.isWeb3) {
       web3Dispatch({ type: "SET_isMetaMask", isMetaMask: isMetaMask() });
     }
   }, [web3State.isWeb3]);
 
-  // Check if logged in to metamask and get account, then listen for address change event: changing account or locking MetaMask
+  // Check if logged in to metamask and get account, then listen for address change event (changing account or locking MetaMask)
   useEffect(() => {
     if (web3State.isWeb3) {
       const onAccountsChanged = async (accounts) => {
@@ -88,7 +82,6 @@ export const useWeb3 = (endpoint) => {
         } catch (e) {
           throw e;
         }
-        console.log("account changed");
       };
       onAccountsChanged();
       window.ethereum.on("accountsChanged", onAccountsChanged);
@@ -112,10 +105,9 @@ export const useWeb3 = (endpoint) => {
     }
   }, [web3State.account, web3State.chainId]);
 
-  // Get ETH amount
+  // Get ETH account balance
   useEffect(() => {
     (async () => {
-      console.log("provider:", web3State.provider);
       if (
         web3State.provider &&
         web3State.account !== web3InitialState.account
@@ -132,13 +124,9 @@ export const useWeb3 = (endpoint) => {
     })();
   }, [web3State.provider, web3State.account]);
 
-  // Listen for balance change for webState.account
+  // Listen for events emitted when a new block is mined to update balance of connected account
   useEffect(() => {
     if (web3State.provider) {
-      console.log("USEFFECT FOR BALANCE CHANGE");
-      console.log("typeof account:", typeof web3State.account);
-      console.log("account: ", web3State.account);
-
       const updateBalance = async (_blockNumber) => {
         const _balance = await web3State.provider.getBalance(web3State.account);
         const balance = ethers.utils.formatEther(_balance);
@@ -158,9 +146,8 @@ export const useWeb3 = (endpoint) => {
     }
   }, [web3State.provider, web3State.account]);
 
-  // GET netword_name and chainId
+  // GET netword name and chainId from object network
   useEffect(() => {
-    console.log("GET NETWORK CALLED");
     (async () => {
       if (web3State.provider) {
         const network = await web3State.provider.getNetwork();

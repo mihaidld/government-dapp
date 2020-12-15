@@ -3,25 +3,33 @@ import { Web3Context } from "../context/Web3Context";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-//import "../form.css";
 import { useToast } from "@chakra-ui/core";
 import { ethers } from "ethers";
 
 function BecomeCitizen() {
+  // consume context
   const { web3State } = useContext(Web3Context);
   const { government } = useContext(ContractsContext);
   const { dappDispatch, citizen, setCitizen } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  // define event handler for submitting form with security check to prevent reaching revert from the blockchain
   const handleSubmitBecomeCitizen = async (event) => {
     try {
       event.preventDefault();
       const age = Number(event.target.elements.age.value);
       if (age === Math.floor(age) && citizen.isAlive === "not alive") {
         await government.becomeCitizen(age);
+
+        /* callback function with same arguments as those of CreatedCitizen
+        event emitted by contract Government, sets state and gives feeback to
+        users after an action has taken place */
         const cb = (
           citizenAddress,
           isAlive,
@@ -60,8 +68,9 @@ function BecomeCitizen() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.CreatedCitizen(web3State.account);
-        // listen once event CreatedCitizen
+        // listen once event CreatedCitizen searching for entries which match the filter
         government.once(filter, cb);
         event.target.reset();
       } else {

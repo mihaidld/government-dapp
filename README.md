@@ -4,10 +4,10 @@
 
 DApp CITIZEN is a project to create a token economy and manage a fictional country and its citizens by deploying smart contracts on Ethereum blockchain (https://github.com/mihaidld/government-sc) and interacting with them through this dApp :
 
-- connexion to the Ethereum network via `MetaMask` provider
+- connection to the Ethereum network via `MetaMask` provider
 - interaction with the smart contracts using `ethers.js` library.
 - projet set up using `Create React App`
-- styled components with `Bootstrap` and `Chakra UI`
+- styled components with `Bootstrap 5` and `Chakra UI`
 - modular components to call different functions of the smart contracts using `React Hooks API` (_useState_, _useEffect_, _useContext_, _useReducer_, _useCallback_) and custom hooks
 - responsive, accessible and with a dark mode
 
@@ -69,6 +69,8 @@ A citizen has also a balance of `CTZ` spread between a `current account`, an `un
 - On being declared `sick` by a hospital all health insurance tokens are transfered into the current account.
 - At `retirement` (if above retirement age) all unemployment insurance and retirement insurance tokens are transferred into the current account.
 - On being declared `dead` by a hospital all tokens of the deceased are given back to the sovereign.
+
+Credits : this project has been designed using resources from Flaticon.com
 
 ## Other Available Scripts
 

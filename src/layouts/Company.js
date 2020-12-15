@@ -3,6 +3,7 @@ import BuyTokens from "../components/BuyTokens";
 import PaySalary from "../components/PaySalary";
 import ChangeEmployment from "../components/ChangeEmployment";
 
+// Layout displayed only to registered companies
 function Company() {
   return (
     <section className="mb-3">

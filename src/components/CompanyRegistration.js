@@ -2,17 +2,22 @@ import React, { useContext } from "react";
 import { ContractsContext } from "../context/ContractsContext";
 import { DappContext } from "../context/DappContext";
 import { ModeContext } from "../context/ModeContext";
-import "../form.css";
 import { useToast } from "@chakra-ui/core";
 
 function CompanyRegistration() {
+  // consume context
   const { government } = useContext(ContractsContext);
   const { dappState } = useContext(DappContext);
   const { mode } = useContext(ModeContext);
+
+  // define classes to handle mode
   const modeButtonClass =
     mode === "dark" ? "btn btn-outline-light" : "btn btn-outline-dark";
+
   const toast = useToast();
 
+  /* define event handler for submitting form to register a company with
+  security check to prevent reaching revert from the blockchain */
   const handleSubmitRegisterCompany = async (event) => {
     try {
       event.preventDefault();
@@ -20,6 +25,10 @@ function CompanyRegistration() {
       const isACompany = await government.checkCompany(address);
       if (dappState.isOwner && !isACompany) {
         await government.registerCompany(address);
+
+        /* callback function with same arguments as those of SetCompany event
+        emitted by contract Government, gives feeback to users after an action
+        has taken place */
         const cb = (company, isCompany) => {
           toast({
             position: "bottom",
@@ -30,8 +39,9 @@ function CompanyRegistration() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.SetCompany(address);
-        // listen once event SetCompany
+        // listen once event SetCompany searching for entries which match the filter
         government.once(filter, cb);
       } else {
         toast({
@@ -49,6 +59,8 @@ function CompanyRegistration() {
     }
   };
 
+  /* define event handler for submitting form to unregister a company with
+  security check to prevent reaching revert from the blockchain */
   const handleSubmitUnregisterCompany = async (event) => {
     try {
       event.preventDefault();
@@ -56,6 +68,10 @@ function CompanyRegistration() {
       const isACompany = await government.checkCompany(address);
       if (dappState.isOwner && isACompany) {
         await government.unregisterCompany(address);
+
+        /* callback function with same arguments as those of SetCompany event
+        emitted by contract Government, gives feeback to users after an action
+        has taken place */
         const cb = (company, isCompany) => {
           toast({
             position: "bottom",
@@ -66,8 +82,9 @@ function CompanyRegistration() {
             isClosable: true,
           });
         };
+        // create event filter only with indexed Event parameters
         const filter = government.filters.SetCompany(address);
-        // listen once event SetCompany
+        // listen once event SetCompany searching for entries which match the filter
         government.once(filter, cb);
         event.target.reset();
       } else {

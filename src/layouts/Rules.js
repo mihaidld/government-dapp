@@ -1,5 +1,6 @@
 import React from "react";
 
+// Layout displayed to everyone logged in to MetaMask to display rules of the token economy and the fictional country
 function Rules() {
   return (
     <section className="mb-2">

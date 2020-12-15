@@ -2,8 +2,10 @@ import React, { useReducer, useState, createContext } from "react";
 import { dappReducer, initialDappState } from "../reducer/dappReducer";
 import { ethers } from "ethers";
 
+// Dapp context
 export const DappContext = createContext();
 
+// Dapp provider for managing roles of connected account and its citizen properties
 export const DappProvider = ({ children }) => {
   const [dappState, dappDispatch] = useReducer(dappReducer, initialDappState);
   const [citizen, setCitizen] = useState({
